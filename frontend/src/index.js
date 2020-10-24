@@ -1,15 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Header from './Header';
+import Body from './Body';
+import Footer from './Footer';
+import Sidebar from './Sidebar';
+
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Header />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('header')
 );
+ReactDOM.render(
+  <React.StrictMode>
+    <Body />
+  </React.StrictMode>,
+  document.getElementById('body')
+);
+ReactDOM.render(
+  <React.StrictMode>
+    <Footer />
+  </React.StrictMode>,
+  document.getElementById('footer')
+);
+ReactDOM.render(
+  <React.StrictMode>
+    <Sidebar />
+  </React.StrictMode>,
+  document.getElementById('sidebar')
+);
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
