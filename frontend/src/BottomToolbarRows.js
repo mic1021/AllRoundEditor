@@ -7,10 +7,10 @@ class BottomToolbarRows extends Component{
     const {className} = this.props;
     return(
       <div>
-        <Grid container spacing={3}>
-          <BottomToolbarRow className={className}></BottomToolbarRow>
-          {/* <BottomToolbarRow></BottomToolbarRow>
-          <BottomToolbarRow></BottomToolbarRow> */}
+        <Grid container spacing={1}>
+          <BottomToolbarRow></BottomToolbarRow>
+          <BottomToolbarRow></BottomToolbarRow>
+          <BottomToolbarRow></BottomToolbarRow>
         </Grid>
       </div>
     );

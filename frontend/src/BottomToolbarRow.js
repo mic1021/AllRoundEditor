@@ -2,12 +2,10 @@ import React,{ Component } from 'react';
 import { Button , Grid} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-let width;
 const styles = {
   root:{
-    background: 'blue'
+    background: 'skyblue'
     ,color:'black'
-    ,padding:'0 0 0 0'
   },
   button:{
     maxWidth:'1000px'
@@ -15,7 +13,6 @@ const styles = {
     ,minWidth:'10px'
     ,minHeight:'10px'
     ,background: 'white'
-    ,padding: '0 0 0 0'
   }
 };
 
