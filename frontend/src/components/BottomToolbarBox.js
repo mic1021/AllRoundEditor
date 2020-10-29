@@ -1,7 +1,7 @@
 import React,{ Component } from 'react';
 import { Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import BottomToolbarRows from './BottomToolbarRows';
+import BottomToolbarRows from './buttonGridComponents/BottomToolbarRows';
 
 const styles = {
   root:{
@@ -10,7 +10,7 @@ const styles = {
     ,padding: '0 0'
     ,margin: '0px 0px 0px 0px'
   }
-};
+};  
 
 class BottomToolbarBox extends Component{
   render(){
