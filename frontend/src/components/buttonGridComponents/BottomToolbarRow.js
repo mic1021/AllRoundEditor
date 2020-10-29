@@ -17,61 +17,23 @@ const styles = {
 };
 
 class BottomToolbarRow extends Component{
-  constructor() {
-    super();
-    this.state = {
-      WindowSize : window.innerWidth
-    }
-    this.handleResize = this.handleResize.bind(this);
-  }
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize);
-  }
-  componentWillUnmount() {
-    window.addEventListener("resize", null);
-  }
-  handleResize(WindowSize, event) {
-    this.setState({WindowSize: window.innerWidth})
-  }
-  shouldComponentUpdate(nextProps,nextState){
-    return ((nextState.WindowSize<600 && this.state.WindowSize>=600)
-    ||(nextState.WindowSize>=600 && this.state.WindowSize<600)
-    ||(nextState.WindowSize<960 && this.state.WindowSize>=960)
-    ||(nextState.WindowSize>=960 && this.state.WindowSize<960)
-    ||(nextState.WindowSize<1280 && this.state.WindowSize>=1280)
-    ||(nextState.WindowSize>=1280 && this.state.WindowSize<1280));
-  }
-  render(){
-    console.log(this.state.WindowSize);
+
+  getItemJSX(items){
     const {classes} = this.props;
+    return items.map(
+      (item) => {
+        return <Grid item className = {classes.root} xs={6} sm={4} md={3} lg={2} xl={2}>
+          <Button className={classes.button} fullWidth>{item}</Button>
+          </Grid>
+      }
+    );
+  }
+
+  render(){
+    const items = this.getItemJSX(this.props.row);
     return(
       <>
-        <Grid item className = {classes.root} xs={6} sm={4} md={3} lg={2} xl={2}>
-          <Button className = {classes.button} fullWidth>+</Button>
-        </Grid>
-        <Grid item className = {classes.root} xs={6} sm={4} md={3} lg={2} xl={2}>
-          <Button className = {classes.button} fullWidth>-</Button>
-        </Grid>
-        { this.state.WindowSize >= 600 &&
-          <Grid item className = {classes.root} xs={6} sm={4} md={3} lg={2} xl={2}>
-            <Button className = {classes.button} fullWidth>x</Button>
-          </Grid>
-        }
-        { this.state.WindowSize >= 960 &&
-          <Grid item className = {classes.root} xs={6} sm={4} md={3} lg={2} xl={2}>
-            <Button className = {classes.button} fullWidth>/</Button>
-          </Grid>
-        }
-        { this.state.WindowSize >= 1280 &&
-          <>
-            <Grid item className = {classes.root} xs={6} sm={4} md={3} lg={2} xl={2}>
-              <Button className = {classes.button} fullWidth>*</Button>
-            </Grid>
-            <Grid item className = {classes.root} xs={6} sm={4} md={3} lg={2} xl={2}>
-              <Button className = {classes.button} fullWidth>$</Button>
-            </Grid>
-          </>
-        }
+        {items}
       </>
     );
   }
