@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import { Box } from '@material-ui/core';
-import BottomToolbars from './BottomToolbars';
+import BottomToolbarRows from './BottomToolbarRows';
 
 class BottomToolbarBox extends Component{
   render(){
