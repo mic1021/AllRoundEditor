@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import EquationList from './components/EquationList';
-import './App.css';
-import BottomToolbarBox from './BottomToolbarBox';
-import {Container} from '@material-ui/core';
+import TextArea from './components/TextArea';
 
-class App extends Component{
-  render(){
+import './App.css';
+
+class App extends React.Component {
+  render () {
     return (
-      <>
-      <Container>
-      <EquationList></EquationList>
-      </Container>
-      <Container>
-      <BottomToolbarBox></BottomToolbarBox>
-      </Container>
-      </>
+      <div>
+        <EquationList></EquationList>
+        <TextArea></TextArea>
+      </div>
     );
-  }
+  } 
 }
 
 export default App;
