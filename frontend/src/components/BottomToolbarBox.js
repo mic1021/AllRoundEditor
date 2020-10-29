@@ -1,6 +1,9 @@
-import React,{ Component } from 'react';
+import React,{ Component , useState} from 'react';
 import BottomToolbarRow from './buttonGridComponents/BottomToolbarRow';
 import { Grid} from '@material-ui/core';
+import {addStyles, StaticMathField, EditableMathField } from 'react-mathquill'
+
+addStyles();
 
 class BottomToolbarBox extends Component{
   constructor() {
