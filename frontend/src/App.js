@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import EquationList from './components/EquationList';
+import TextArea from './components/TextArea';
 
 import './App.css';
-import BottomToolbarBox from './BottomToolbarBox';
 
-class App extends Component{
-  render(){
+class App extends React.Component {
+  render () {
     return (
-      <EquationList></EquationList>
-      <BottomToolbarBox>abc</BottomToolbarBox>
+      <div>
+        <EquationList></EquationList>
+        <TextArea></TextArea>
+      </div>
     );
-  }
+  } 
+}
+
 export default App;
