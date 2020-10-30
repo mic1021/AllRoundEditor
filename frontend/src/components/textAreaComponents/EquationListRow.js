@@ -71,6 +71,7 @@ export default class EquationListRow extends React.Component {
                         anchorEl={this.state.anchorEl}
                         open={Boolean(this.state.anchorEl)}
                         keepMounted
+                        onClose={this.handleClose}
                     >
                         <MenuItem onClick={this.handleClose}>Edit</MenuItem>
                         <MenuItem onClick={this.handleClose}>Delete</MenuItem>
