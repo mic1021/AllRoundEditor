@@ -11,8 +11,9 @@ const styles = {
     maxWidth:'1000px'
     ,maxHeight:'1000px'
     ,minWidth:'10px'
-    ,minHeight:'10px'
+    ,minHeight:'100px'
     ,background: 'white'
+    ,textTransform: 'lowercase'
   }
 };
 
@@ -22,7 +23,7 @@ class BottomToolbarRow extends Component{
     const {classes} = this.props;
     return items.map(
       (item) => {
-        return <Grid item className = {classes.root} xs={6} sm={4} md={3} lg={2} xl={2}>
+        return <Grid item className = {classes.root} xs={3} sm={2} md={2} lg={1} xl={1}>
           <Button className={classes.button} fullWidth>{item}</Button>
           </Grid>
       }

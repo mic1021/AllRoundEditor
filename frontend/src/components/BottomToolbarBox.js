@@ -31,34 +31,15 @@ class BottomToolbarBox extends Component{
     ||(nextState.WindowSize>=1280 && this.state.WindowSize<1280));
   }
 
-  getJSX(rows){
-    return rows.map(
-      (row) => {
-        return <BottomToolbarRow row={row}></BottomToolbarRow>
-      }
-    )
+  getMathSymbol(_latex, _fontSize = '300%') {
+    return <><StaticMathField style={{ fontSize: _fontSize }}>{_latex}</StaticMathField><div style={{ position: 'absolute', top: '80%' }}>{_latex}</div></>
   }
-
-  render(){
-    let columnNum;
-    if(this.state.WindowSize<600) columnNum=2;
-    else if(this.state.WindowSize<960) columnNum=3;
-    else if(this.state.WindowSize<1280) columnNum=4;
-    else columnNum=6;
-
-    const rows = [
-      []
-      ,[]
-      ,[['a','b'],['c','d'],['e','f'],['g','h'],['i','j'],['k','l']]
-      ,[['a','b','c'],['d','e','f'],['g','h','i'],['j','k','l']]
-      ,[['a','b','c','d'],['e','f','g','h'],['i','j','k','l']]
-      ,[]
-      ,[['a','b','c','d','e','f'],['g','h','i','j','k','l']]
-    ];
-    const rowsJSX = this.getJSX(rows[columnNum]);
-    return(
+  render() {
+    const row = [this.getMathSymbol('\\frac{}{}', '200%'), this.getMathSymbol('\\sqrt{}'), this.getMathSymbol('\\sqrt[]{}'), this.getMathSymbol('\\int', '170%'), this.getMathSymbol('\\sum', '130%'), this.getMathSymbol('+', '400%'), this.getMathSymbol('-', '400%'), this.getMathSymbol('\\times', '400%'), this.getMathSymbol('\\div', '400%'), this.getMathSymbol('\\pm', '400%'), this.getMathSymbol('\\mp'), this.getMathSymbol('\\sin^{}')];
+    const latexs = ['\\sqrt{}', '\\sqrt[]{}', '\\frac{}{}', '+', '-', '\\times', '\\div', '\\pm', '\\mp', '\\int', '\\sum', '\\sin^{}', '\\cos^{}', '\\tan^{}', '', '', '', '', '', '', '', ''];
+    return (
       <Grid container spacing={1}>
-        {rowsJSX}
+        <BottomToolbarRow row={row}></BottomToolbarRow>
       </Grid>
     );
   }
