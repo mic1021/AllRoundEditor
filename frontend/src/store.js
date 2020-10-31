@@ -1,6 +1,6 @@
 import {createStore} from 'redux';
 
-export default createStore(function(state, action) {
+export default createStore((state, action) => {
     if (state === undefined) {
         return {
             id: 4,

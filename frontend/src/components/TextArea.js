@@ -21,11 +21,19 @@ export default class TextArea extends React.Component {
             })
         }.bind(this))
         this.handleEnterPress = this.handleEnterPress.bind(this);
+        this.submit = this.submit.bind(this);
+    }
+    // action creator, 
+    submit = () => {
+        return {
+            type: 'SUBMIT',
+            payload: this.state.latex
+        }
     }
 
     handleEnterPress = (clicked) => (event) => {
         if(event.key==="enter" || clicked === "onClick") {
-            store.dispatch({type: 'SUBMIT', latex:this.state.latex});
+            store.dispatch(this.submit());
         }
         console.log(store.getState());
     }
