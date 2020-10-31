@@ -13,16 +13,16 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 export default class EquationList extends React.Component { 
+    state = {
+        equations: store.getState().equations
+    }
     constructor(props) {
         super(props);
-        this.state = {
-            equations: store.getState().equations
-        }
         store.subscribe(function() {
             this.setState({
                 equations: store.getState().equations
             })
-        }).bind(this)
+        }.bind(this));
         this.toggleChecked = this.toggleChecked.bind(this);
         this.changeMode = this.changeMode.bind(this);
     }

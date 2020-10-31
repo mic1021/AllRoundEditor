@@ -1,5 +1,5 @@
 import React,{ Component , useState} from 'react';
-import BottomToolbarRow from './buttonGridComponents/BottomToolbarRow';
+import BottomToolbarRow from './BottomToolbarRow';
 import { Grid} from '@material-ui/core';
 import {addStyles, StaticMathField, EditableMathField } from 'react-mathquill'
 
