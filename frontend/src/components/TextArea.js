@@ -2,15 +2,58 @@ import React from 'react';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import TextField from '@material-ui/core/TextField';
-import BottomToolbarBox from './BottomToolbarBox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import IconButton from '@material-ui/core/IconButton';
+import PublishIcon from '@material-ui/icons/Publish';
+import BottomToolbarBox from './buttonGridComponents/BottomToolbarBox';
+import EditableField from './mathFieldComponents/EditableField';
+import store from '../store';
 
 export default class TextArea extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            latex: store.getState().latex
+        }
+        store.subscribe(function() {
+            this.setState({
+                latex: store.getState().latex
+            })
+        }.bind(this))
+        this.handleEnterPress = this.handleEnterPress.bind(this);
+        this.submit = this.submit.bind(this);
+    }
+    // action creator, 
+    submit = () => {
+        return {
+            type: 'SUBMIT',
+            payload: this.state.latex
+        }
+    }
+
+    handleEnterPress = (clicked) => (event) => {
+        if(event.key==="enter" || clicked === "onClick") {
+            store.dispatch(this.submit());
+        }
+        console.log(store.getState());
+    }
+
     render() {
         return(
             <Accordion>
                 <AccordionSummary>
-                    <TextField></TextField>
+                    <EditableField></EditableField>
+                    <FormControlLabel
+                        aria-label="Acknowledge"
+                        onClick={(event) => event.stopPropagation()}
+                        onFocus={(event) => event.stopPropagation()}
+                        control={
+                            <IconButton onClick={this.handleEnterPress("onClick")} onKeyPress={this.handleEnterPress}>
+                                <PublishIcon></PublishIcon>
+                            </IconButton>
+                        }
+                    >
+                    </FormControlLabel>
                 </AccordionSummary>
                 <AccordionDetails>
                     <BottomToolbarBox></BottomToolbarBox>

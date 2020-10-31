@@ -1,15 +1,13 @@
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import CheckBox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
-
-
+import { StaticMathField } from 'react-mathquill';
 
 export default class EquationListRow extends React.Component {
     constructor(props) {
@@ -37,7 +35,7 @@ export default class EquationListRow extends React.Component {
 
     render() {
         const equation = this.props.equation;
-
+        
         return (
             <ListItem
                 key={this.props.key}
@@ -49,17 +47,13 @@ export default class EquationListRow extends React.Component {
                 <ListItemIcon>
                     <CheckBox
                         edge="start"
-                        checked={this.props.equation.checked}
+                        checked={equation.checked}
                         tabIndex="-1"
                         disableRipple
                     >
                     </CheckBox>
                 </ListItemIcon>
-                <ListItemText
-                    id={equation.id}
-                    primary={equation.equation}
-                >
-                </ListItemText>
+                <StaticMathField>{equation.equation}</StaticMathField>
                 <ListItemSecondaryAction>
                     <IconButton
                         aria-haspopup="true"

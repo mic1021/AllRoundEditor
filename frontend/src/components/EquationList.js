@@ -1,7 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import SaveIcon from '@material-ui/icons/Save';
 import EquationListRow from './textAreaComponents/EquationListRow';
+import { makeStyles } from '@material-ui/core/styles';
 import store from '../store';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,16 +16,16 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 export default class EquationList extends React.Component { 
+    state = {
+        equations: store.getState().equations
+    }
     constructor(props) {
         super(props);
-        this.state = {
-            equations: store.getState().equations
-        }
         store.subscribe(function() {
             this.setState({
                 equations: store.getState().equations
             })
-        }).bind(this)
+        }.bind(this));
         this.toggleChecked = this.toggleChecked.bind(this);
         this.changeMode = this.changeMode.bind(this);
     }
@@ -77,9 +80,20 @@ export default class EquationList extends React.Component {
             );
         })
         return (
-            <List>
-                {rows}
-            </List>
+            <div>
+                <List>
+                    {rows}
+                </List>
+                <BottomNavigation
+                    value={"dingdong"}
+                    onChange={() => {
+                        //Save Checked Bois into Backend - 
+                        console.log("eh");
+                    }}
+                >
+                    <BottomNavigationAction label="heh" value="yey" icon={<SaveIcon />}></BottomNavigationAction>
+                </BottomNavigation>
+            </div>            
         )
     }
 }
