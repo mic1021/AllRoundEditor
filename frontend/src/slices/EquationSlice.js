@@ -8,8 +8,8 @@ export const EquationSlice = createSlice({
         data: []
     },
     reducers: {
-        submit: state=>
+        //submit: state=>
     }
 })
 
-//USE CONNECT INSTEAD OF SUBSCRIBE 
+//USE CONNECT INSTEAD OF SUBSCRIBE TO FIX RERENDERING ISSUE
