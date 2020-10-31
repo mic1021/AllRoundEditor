@@ -9,8 +9,6 @@ import CheckBox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 
-
-
 export default class EquationListRow extends React.Component {
     constructor(props) {
         super(props);
@@ -71,6 +69,7 @@ export default class EquationListRow extends React.Component {
                         anchorEl={this.state.anchorEl}
                         open={Boolean(this.state.anchorEl)}
                         keepMounted
+                        onClose={this.handleClose}
                     >
                         <MenuItem onClick={this.handleClose}>Edit</MenuItem>
                         <MenuItem onClick={this.handleClose}>Delete</MenuItem>
