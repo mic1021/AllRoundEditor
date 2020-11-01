@@ -16,20 +16,19 @@ let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedL
 
 class EditableField extends React.Component {
     constructor(props) {
-      super(props);
-      this.state = {
-        latex: store.getState().latex
-      };
-      store.subscribe(function() {
-          this.setState({
-              latex: store.getState().latex
-          })
-      }.bind(this));
-    }
-   
+        super(props);
         this.editableField=React.createRef();
+        this.state = {
+            latex: store.getState().latex
+        };
+        store.subscribe(function() {
+            this.setState({
+                latex: store.getState().latex
+            })
+        }.bind(this));
+        }
+
     render() {
-        var nowCursor = document.getElementsByClassName('mq-hasCursor')[0];
         const {classes} = this.props;
 
         return (
