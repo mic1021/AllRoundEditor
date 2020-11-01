@@ -27,19 +27,20 @@ class EditableField extends React.Component {
       }.bind(this));
     }
    
+        this.editableField=React.createRef();
     render() {
         var nowCursor = document.getElementsByClassName('mq-hasCursor')[0];
         const {classes} = this.props;
 
         return (
+            <div ref = {this.editableField}>
             <EditableMathField
             className={classes.root}
             latex={this.state.latex} // Initial latex value for the input field
             onChange={(mathField) => {
                 // Called everytime the input changes
                 //console.log(mathField.latex());
-                store.dispatch({type: "EDIT", latex: mathField.latex()})
-                let nowCursor = document.getElementsByClassName('mq-hasCursor')[0];
+                let nowCursor = this.editableField.current.getElementsByClassName('mq-hasCursor')[0];
                 if(modifying==false){
                     selectedLatex=this.showAutoCompleteAndSelect(mathField.latex())
                 }
@@ -51,23 +52,22 @@ class EditableField extends React.Component {
                             modifying=false;
                             firstWhileFinished=false;
                             secondWhileFinished=false;
-                            this.setState({
-                                latex:mathField.latex()
-                            })
+                            selectedLatex="";
+                            store.dispatch({type: "EDIT", latex: mathField.latex()})
                         }
                         else if(modifying==true){
-                            let nowCursorElement = document.getElementsByClassName('mq-cursor')[0];
+                            let nowCursorElement = this.editableField.current.getElementsByClassName('mq-cursor')[0];
                             while(!firstWhileFinished){
                                 while(!this.isMqnonleaf(nowCursorElement.nextSibling)) {
                                     mathField.keystroke('Left');
-                                    nowCursorElement = document.getElementsByClassName('mq-cursor')[0];
+                                    nowCursorElement = this.editableField.current.getElementsByClassName('mq-cursor')[0];
                                 }
                                 firstWhileFinished=true;
                                 break;
                             }
                             while(!secondWhileFinished){
                                 mathField.keystroke('Left');
-                                nowCursorElement = document.getElementsByClassName('mq-cursor')[0];
+                                nowCursorElement = this.editableField.current.getElementsByClassName('mq-cursor')[0];
                                 if(this.isCommandInput(nowCursorElement.nextSibling)) {
                                     secondWhileFinished=true;
                                 }
@@ -78,13 +78,12 @@ class EditableField extends React.Component {
                         }
                     }
                     else {
-                        this.setState({
-                            latex:mathField.latex()
-                        })
+                        store.dispatch({type: "EDIT", latex: mathField.latex()})
                     }
                 }
             }}
             />
+            </div>
         )
     }
 
