@@ -8,6 +8,8 @@ import CheckBox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { StaticMathField } from 'react-mathquill';
+import { EDIT, DELETE } from '../../slices/EquationSlice';
+import { useDispatch } from 'react-redux';
 
 export default class EquationListRow extends React.Component {
     constructor(props) {
@@ -17,10 +19,12 @@ export default class EquationListRow extends React.Component {
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.dispatch = this.dispatch.bind(this);
     }
 
+    dispatch = useDispatch();
+
     handleClick = (e) => {
-        console.log(e);
         this.setState({
             anchorEl: e.currentTarget
         });
@@ -30,7 +34,8 @@ export default class EquationListRow extends React.Component {
         this.setState({
             anchorEl: null
         });
-        this.props.changeMode(e);
+        //if(e.target.value === 'EDIT') this.dispatch(EDIT(Number(this.props.key)));
+        //if(e.target.value === 'DELETE') this.dispatch(DELETE());
     }
 
     render() {

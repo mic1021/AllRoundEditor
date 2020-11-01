@@ -1,8 +1,9 @@
 import React from 'react';
 import { addStyles , EditableMathField} from 'react-mathquill';
 import { makeStyles } from '@material-ui/core/styles';
-import store from '../../store';
 import { withStyles } from '@material-ui/styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectLatex, TYPE } from '../../slices/EquationSlice';
 
 //addStyles()
 
@@ -15,18 +16,15 @@ const useStyles = makeStyles({
 let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedLatex="";
 
 class EditableField extends React.Component {
+    latex = useSelector(selectLatex);
+
     constructor(props) {
         super(props);
         this.editableField=React.createRef();
-        this.state = {
-            latex: store.getState().latex
-        };
-        store.subscribe(function() {
-            this.setState({
-                latex: store.getState().latex
-            })
-        }.bind(this));
-        }
+        this.dispatch = this.dispatch.bind(this);
+    }
+
+    dispatch = useDispatch();
 
     render() {
         const {classes} = this.props;
@@ -52,7 +50,7 @@ class EditableField extends React.Component {
                             firstWhileFinished=false;
                             secondWhileFinished=false;
                             selectedLatex="";
-                            store.dispatch({type: "EDIT", latex: mathField.latex()})
+                            this.dispatch(TYPE(mathField.latex()))
                         }
                         else if(modifying==true){
                             let nowCursorElement = this.editableField.current.getElementsByClassName('mq-cursor')[0];
@@ -77,7 +75,7 @@ class EditableField extends React.Component {
                         }
                     }
                     else {
-                        store.dispatch({type: "EDIT", latex: mathField.latex()})
+                        this.dispatch(TYPE(mathField.latex()))
                     }
                 }
             }}

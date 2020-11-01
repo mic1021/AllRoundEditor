@@ -7,35 +7,23 @@ import IconButton from '@material-ui/core/IconButton';
 import PublishIcon from '@material-ui/icons/Publish';
 import BottomToolbarBox from './buttonGridComponents/BottomToolbarBox';
 import EditableField from './mathFieldComponents/EditableField';
-import store from '../store';
+import { useDispatch } from 'react-redux';
+import { SUBMIT } from '../slices/EquationSlice';
 
 export default class TextArea extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            latex: store.getState().latex
-        }
-        store.subscribe(function() {
-            this.setState({
-                latex: store.getState().latex
-            })
-        }.bind(this))
         this.handleEnterPress = this.handleEnterPress.bind(this);
-        this.submit = this.submit.bind(this);
+        this.dispatch = this.dispatch.bind(this);
     }
     // action creator, 
-    submit = () => {
-        return {
-            type: 'SUBMIT',
-            payload: this.state.latex
-        }
-    }
+
+    dispatch = useDispatch();
 
     handleEnterPress = (clicked) => (event) => {
         if(event.key==="enter" || clicked === "onClick") {
-            store.dispatch(this.submit());
+            //this.dispatch(SUBMIT());
         }
-        console.log(store.getState());
     }
 
     render() {

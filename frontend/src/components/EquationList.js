@@ -5,7 +5,8 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import SaveIcon from '@material-ui/icons/Save';
 import EquationListRow from './textAreaComponents/EquationListRow';
 import { makeStyles } from '@material-ui/core/styles';
-import store from '../store';
+import {useSelector} from 'react-redux';
+import {selectEquation} from '../slices/EquationSlice';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,66 +17,42 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 export default class EquationList extends React.Component { 
-    state = {
-        equations: store.getState().equations
-    }
+    equations = useSelector(selectEquation)
+
     constructor(props) {
         super(props);
-        store.subscribe(function() {
-            this.setState({
-                equations: store.getState().equations
-            })
-        }.bind(this));
+        this.state = {
+            checked: []
+        }
         this.toggleChecked = this.toggleChecked.bind(this);
-        this.changeMode = this.changeMode.bind(this);
+        this.equations = this.equations.bind(this);
     }
     
-    toggleChecked = (id, checked) => () => {
-        id--;
-        if (checked === false) {
-            this.setState(({equations}) => ({
-                equations: [
-                    ...equations.slice(0, id),
-                    {
-                        ...equations[id],
-                        checked: true
-                    },
-                    ...equations.slice(id + 1)
+    toggleChecked = (index) => () => {
+        if (this.checked[index] === false) {
+            this.setState({
+                checked: [
+                    ...checked.slice(index, 1, true)
                 ]
-            }));
-        }
-        else {
-            this.setState(({equations}) => ({
-                equations: [
-                    ...equations.slice(0, id),
-                    {
-                        ...equations[id],
-                        checked: false
-                    },
-                    ...equations.slice(id + 1)
+            })
+        } else {
+            this.setState({
+                checked: [
+                    ...checked.slice(index, 1, false)
                 ]
-            }));
+            })
         }
-    }
-
-    changeMode = (e) => {
-        console.log(e);
-        console.log("before: " + this.state.mode);
-        this.setState({
-            mode: e.target.value
-        });
-        console.log("after: " + this.state.mode);
     }
 
     render() {
         const rows = []; 
-        this.state.equations.forEach((equation) => {
+        this.state.equations.forEach((equation, index) => {
+            this.checked.push(false);
             rows.push(
                 <EquationListRow
-                    equation={equation}
-                    toggleChecked={this.toggleChecked(equation.id, equation.checked)}
-                    changeMode={this.changeMode}
-                    key={equation.id}
+                    equation={{equation: equation, checked: checked[index]}}
+                    toggleChecked={this.toggleChecked(index)}
+                    key={index}
                 ></EquationListRow>
             );
         })
