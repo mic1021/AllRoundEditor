@@ -1,8 +1,9 @@
 import React from 'react';
 import { addStyles , EditableMathField} from 'react-mathquill';
 import { makeStyles } from '@material-ui/core/styles';
-import store from '../../store';
 import { withStyles } from '@material-ui/styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectLatex, TYPE } from '../../slices/EquationSlice';
 
 //addStyles()
 
@@ -14,19 +15,17 @@ const useStyles = makeStyles({
 
 let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedLatex="";
 
+function Child(props) {
+    const latex = useSelector(selectLatex);
+    const dispatch = useDispatch();
+}
+
 class EditableField extends React.Component {
+
     constructor(props) {
         super(props);
         this.editableField=React.createRef();
-        this.state = {
-            latex: store.getState().latex
-        };
-        store.subscribe(function() {
-            this.setState({
-                latex: store.getState().latex
-            })
-        }.bind(this));
-        }
+    }
 
     render() {
         const {classes} = this.props;
@@ -40,21 +39,21 @@ class EditableField extends React.Component {
                 // Called everytime the input changes
                 //console.log(mathField.latex());
                 let nowCursor = this.editableField.current.getElementsByClassName('mq-hasCursor')[0];
-                if(modifying==false){
+                if(modifying===false){
                     selectedLatex=this.showAutoCompleteAndSelect(mathField.latex())
                 }
-                if(nowCursor != undefined){
-                    if(selectedLatex!=""){
-                        if(modifying==false && this.isCommandInput(nowCursor)){
+                if(nowCursor !== undefined){
+                    if(selectedLatex!==""){
+                        if(modifying===false && this.isCommandInput(nowCursor)){
                             modifying=true;
                             mathField.cmd(selectedLatex);
                             modifying=false;
                             firstWhileFinished=false;
                             secondWhileFinished=false;
                             selectedLatex="";
-                            store.dispatch({type: "EDIT", latex: mathField.latex()})
+                            this.dispatch(TYPE(mathField.latex()))
                         }
-                        else if(modifying==true){
+                        else if(modifying===true){
                             let nowCursorElement = this.editableField.current.getElementsByClassName('mq-cursor')[0];
                             while(!firstWhileFinished){
                                 while(!this.isMqnonleaf(nowCursorElement.nextSibling)) {
@@ -77,7 +76,7 @@ class EditableField extends React.Component {
                         }
                     }
                     else {
-                        store.dispatch({type: "EDIT", latex: mathField.latex()})
+                        this.dispatch(TYPE(mathField.latex()))
                     }
                 }
             }}
@@ -92,16 +91,16 @@ class EditableField extends React.Component {
         return "\\frac";
     }
     isText(nowCursor){
-        return  nowCursor!=null && nowCursor.nodeValue=="\\";
+        return  nowCursor!==null && nowCursor.nodeValue==="\\";
     }
     isCommandInput(nowCursor){
-        return nowCursor!=null && nowCursor.className.includes("mq-latex-command-input");
+        return nowCursor!==null && nowCursor.className.includes("mq-latex-command-input");
     }
     isMqnonleaf(nowCursor){
-        return nowCursor!=null && nowCursor.className.includes("mq-non-leaf");
+        return nowCursor!==null && nowCursor.className.includes("mq-non-leaf");
     }
     getLatexField(nowCursor){
-        return nowCursor!=null && nowCursor.innerText;
+        return nowCursor!==null && nowCursor.innerText;
     }
 }
 

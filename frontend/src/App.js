@@ -1,5 +1,5 @@
 import React from 'react';
-import EquationList from './components/EquationList';
+import EquationList from './components/textAreaComponents/EquationList';
 import TextArea from './components/TextArea';
 
 import './App.css';
