@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const selectEquation = state => state.equations.equations
 export const selectLatex = state => state.equations.latex
 export const selectChecked = state => state.equations.checked
+export const selectCursor = state => state.equations.cursor
 
 export const EquationSlice = createSlice({
     name: 'equations',
@@ -14,7 +15,8 @@ export const EquationSlice = createSlice({
             "x + 5 = 3"
         ],
         checked: [],
-        edit: null
+        edit: null,
+        cursor: 0
     },
     reducers: {
         INITCHECK: state => {
@@ -60,11 +62,14 @@ export const EquationSlice = createSlice({
         SAVE: (state, action) => {
             //ACTION.PAYLOAD IS AN ARRAY OF CHECKED LIST
             //SAVE TO BACKEND
+        },
+        CURSOR: (state,action) => {
+            state.cursor = action.payload;
         }
     }
 })
 
-export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE } = EquationSlice.actions
+export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE ,CURSOR,SAVE} = EquationSlice.actions
 
 export default EquationSlice.reducer
 
