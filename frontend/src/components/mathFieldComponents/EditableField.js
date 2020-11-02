@@ -1,11 +1,10 @@
-import React from 'react';
-import { addStyles , EditableMathField} from 'react-mathquill';
+import React,{useRef} from 'react';
+import { EditableMathField} from 'react-mathquill';
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectLatex, TYPE } from '../../slices/EquationSlice';
-
-//addStyles()
+import { useForkRef } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
@@ -13,43 +12,88 @@ const useStyles = makeStyles({
     },
 });
 
-let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedLatex="";
+let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedLatex="",binaryOperator=false;
 
-function EditableField(props) {
+function EditableField(props){
     const latex = useSelector(selectLatex);
     const dispatch = useDispatch();
-    //const {classes} = props;
-    /*
-    const showAutoCompleteAndSelect = (latexField) => {
-        //\로 시작하면 해당 글자에 해당하는 수식 후보군을 모달창에 보여주고, 사용자가 선택한 수식을 반환
-        //사용자가 선택하지 않았을 경우(esc로 종료한 경우) 빈문자열을 반환
-        return "\\frac";
-    }
-    const isText = (nowCursor) => {
-        return  nowCursor!==null && nowCursor.nodeValue==="\\";
-    }
-    const isCommandInput = (nowCursor) => {
-        return nowCursor!==null && nowCursor.className.includes("mq-latex-command-input");
-    }
-    const isMqnonleaf = (nowCursor) => {
-        return nowCursor!==null && nowCursor.className.includes("mq-non-leaf");
-    }
-    const getLatexField = (nowCursor) =>{
-        return nowCursor!==null && nowCursor.innerText;
-    }
-    */
+    const editableField = useRef();
+    const {classes} = props;
 
-    const handleChange = (event) => {
-        dispatch(TYPE(event.latex()));
+    const handleChange = (mathField) => {
+        // Called everytime the input changes
+        //console.log(mathField.latex());
+        let nowCursor = editableField.current.getElementsByClassName('mq-hasCursor')[0];
+        if(nowCursor !== undefined){
+            if(modifying===false && nowCursor.innerText[0] == "\\"){
+                selectedLatex=showAutoCompleteAndSelect(nowCursor.innerText);
+            }   
+            if(selectedLatex!==""){
+                if(modifying===false && isCommandInput(nowCursor)){
+                    modifying=true;
+                    mathField.cmd(selectedLatex);
+                    modifying=false;
+                    firstWhileFinished=false;
+                    secondWhileFinished=false;
+                    if(binaryOperator){
+                        mathField.keystroke('Right');
+                        binaryOperator=false;
+                    }
+                    selectedLatex="";
+                    dispatch(TYPE(mathField.latex()))
+                }
+                else if(modifying===true){
+                    let nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
+                    while(!firstWhileFinished){
+                        if(isBinaryOperator(nowCursorElement.nextSibling) || isMqnonleaf(nowCursorElement.nextSibling)){
+                            firstWhileFinished=true;
+                            break;
+                        }
+                        mathField.keystroke('Left');
+                        nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
+                    }
+                    while(!secondWhileFinished){
+                        mathField.keystroke('Left');
+                        nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
+                        if(isCommandInput(nowCursorElement.nextSibling)) {
+                            secondWhileFinished=true;
+                        }
+                        mathField.keystroke('Right');
+                        mathField.keystroke('Backspace');
+                        break;
+                    }
+                }
+            }
+            else {
+                dispatch(TYPE(mathField.latex()))
+            }
+        }
     }
 
     return (
+        <div ref={editableField}>
         <EditableMathField
+            className={classes.root}
             latex={latex}
             onChange={handleChange}
-        >    
-        </EditableMathField>
+        />
+        </div>
     )
+}
+const showAutoCompleteAndSelect = (latexField) => {
+    //\로 시작하면 해당 글자에 해당하는 수식 후보군을 모달창에 보여주고, 사용자가 선택한 수식을 반환
+    //사용자가 선택하지 않았을 경우(esc로 종료한 경우) 빈문자열을 반환
+    return "\\frac";
+}
+const isCommandInput = (nowCursor) => {
+    return nowCursor!==null && nowCursor.className.includes("mq-latex-command-input");
+}
+const isMqnonleaf = (nowCursor) => {
+    return nowCursor!==null && nowCursor.className.includes("mq-non-leaf");
+}
+
+const isBinaryOperator = (nowCursor) => {
+    return binaryOperator = (nowCursor!==null && nowCursor.className.includes("mq-binary-operator"));
 }
 
 export default withStyles(useStyles)(EditableField)
