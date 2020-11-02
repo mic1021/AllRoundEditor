@@ -12,6 +12,7 @@ export const EquationSlice = createSlice({
     reducers: {
         TYPE: (state, action) => {
             state.latex = action.payload;
+            console.log(state.latex);
         },
         SUBMIT: (state, action) => {
             if (action.payload === 'NEW') {

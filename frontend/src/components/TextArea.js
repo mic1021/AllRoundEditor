@@ -10,43 +10,36 @@ import EditableField from './mathFieldComponents/EditableField';
 import { useDispatch } from 'react-redux';
 import { SUBMIT } from '../slices/EquationSlice';
 
-export default class TextArea extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleEnterPress = this.handleEnterPress.bind(this);
-        this.dispatch = this.dispatch.bind(this);
-    }
-    // action creator, 
+function TextArea(props){
+    const dispatch = useDispatch();
 
-    dispatch = useDispatch();
-
-    handleEnterPress = (clicked) => (event) => {
+    const handleEnterPress = (clicked) => (event) => {
         if(event.key==="enter" || clicked === "onClick") {
-            //this.dispatch(SUBMIT());
+            dispatch(SUBMIT());
         }
     }
 
-    render() {
-        return(
-            <Accordion>
-                <AccordionSummary>
-                    <EditableField></EditableField>
-                    <FormControlLabel
-                        aria-label="Acknowledge"
-                        onClick={(event) => event.stopPropagation()}
-                        onFocus={(event) => event.stopPropagation()}
-                        control={
-                            <IconButton onClick={this.handleEnterPress("onClick")} onKeyPress={this.handleEnterPress}>
-                                <PublishIcon></PublishIcon>
-                            </IconButton>
-                        }
-                    >
-                    </FormControlLabel>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <BottomToolbarBox></BottomToolbarBox>
-                </AccordionDetails>
-            </Accordion>
-        )
-    }
+    return(
+        <Accordion>
+            <AccordionSummary>
+                <EditableField></EditableField>
+                <FormControlLabel
+                    aria-label="Acknowledge"
+                    onClick={(event) => event.stopPropagation()}
+                    onFocus={(event) => event.stopPropagation()}
+                    control={
+                        <IconButton onClick={handleEnterPress("onClick")} onKeyPress={handleEnterPress}>
+                            <PublishIcon></PublishIcon>
+                        </IconButton>
+                    }
+                >
+                </FormControlLabel>
+            </AccordionSummary>
+            <AccordionDetails>
+                <BottomToolbarBox></BottomToolbarBox>
+            </AccordionDetails>
+        </Accordion>
+    )
 }
+
+export default TextArea;
