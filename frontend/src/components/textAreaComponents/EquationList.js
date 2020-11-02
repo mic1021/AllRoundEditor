@@ -2,8 +2,8 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import EquationListRow from './EquationListRow';
 import { makeStyles } from '@material-ui/core/styles';
-import {useSelector} from 'react-redux';
-import {selectEquation} from '../../slices/EquationSlice';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import { selectEquation, INITCHECK } from '../../slices/EquationSlice';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,16 +14,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function EquationList(props) {
-    const equations = useSelector(selectEquation)
-
+    const equations = useSelector(selectEquation, shallowEqual)
+    const dispatch = useDispatch();
     const rows = [];
+
+    dispatch(INITCHECK());
+
     equations.forEach((equation, index) => {
-        console.log(index);
-        props.pushFalse();
+        console.log(equation);
         rows.push(
             <EquationListRow
-                equation={[equation, props.checked[index]]}
-                toggleChecked={props.toggleChecked(index)}
+                equation={equation}
                 index={index}
             ></EquationListRow>
         );
