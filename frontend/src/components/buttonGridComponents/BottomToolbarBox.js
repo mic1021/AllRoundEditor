@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import BottomToolbarRow from './BottomToolbarRow';
 import { Grid} from '@material-ui/core';
-import {addStyles, StaticMathField, EditableMathField } from 'react-mathquill'
+import {addStyles, StaticMathField } from 'react-mathquill'
 
 addStyles();
 

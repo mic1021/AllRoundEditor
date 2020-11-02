@@ -2,7 +2,7 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import EquationListRow from './EquationListRow';
 import { makeStyles } from '@material-ui/core/styles';
-import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { selectEquation, INITCHECK } from '../../slices/EquationSlice';
 import { uid } from 'react-uid';
 
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function EquationList(props) {
-    const equations = useSelector(selectEquation, shallowEqual)
+    const equations = useSelector(selectEquation)
     const dispatch = useDispatch();
     const rows = [];
 

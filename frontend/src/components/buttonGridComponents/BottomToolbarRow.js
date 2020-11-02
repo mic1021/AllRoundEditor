@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button , Grid} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectLatex, TYPE } from '../../slices/EquationSlice';
 
 const styles = {
   root:{
@@ -19,12 +21,17 @@ const styles = {
 
 function BottomToolbarRow(props){
 
+  const dispatch = useDispatch();
+  const latex = useSelector(selectLatex);
   const getItemJSX = (items) => {
     const {classes} = props;
     return items.map(
       (item) => {
         return <Grid item className = {classes.root} xs={3} sm={2} md={2} lg={1} xl={1}>
-          <Button className={classes.button} fullWidth>{item}</Button>
+          <Button className={classes.button} 
+            onClick={(e) => {dispatch(TYPE(latex+(item.props.children[0].props.children)))}} fullWidth>
+            {item}
+          </Button>
           </Grid>
       }
     );
