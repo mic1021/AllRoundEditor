@@ -4,6 +4,7 @@ import EquationListRow from './EquationListRow';
 import { makeStyles } from '@material-ui/core/styles';
 import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 import { selectEquation, INITCHECK } from '../../slices/EquationSlice';
+import { uid } from 'react-uid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,6 +27,7 @@ function EquationList(props) {
             <EquationListRow
                 equation={equation}
                 index={index}
+                key={uid(equation)}
             ></EquationListRow>
         );
     })
