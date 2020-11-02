@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectLatex, TYPE } from '../../slices/EquationSlice';
+import { useForkRef } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
@@ -11,7 +12,7 @@ const useStyles = makeStyles({
     },
 });
 
-let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedLatex="";
+let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedLatex="",binaryOperator=false;
 
 function EditableField(props){
     const latex = useSelector(selectLatex);
@@ -23,10 +24,10 @@ function EditableField(props){
         // Called everytime the input changes
         //console.log(mathField.latex());
         let nowCursor = editableField.current.getElementsByClassName('mq-hasCursor')[0];
-        if(modifying===false){
-            selectedLatex=showAutoCompleteAndSelect(mathField.latex())
-        }
         if(nowCursor !== undefined){
+            if(modifying===false && nowCursor.innerText[0] == "\\"){
+                selectedLatex=showAutoCompleteAndSelect(nowCursor.innerText);
+            }   
             if(selectedLatex!==""){
                 if(modifying===false && isCommandInput(nowCursor)){
                     modifying=true;
@@ -34,13 +35,17 @@ function EditableField(props){
                     modifying=false;
                     firstWhileFinished=false;
                     secondWhileFinished=false;
+                    if(binaryOperator){
+                        mathField.keystroke('Right');
+                        binaryOperator=false;
+                    }
                     selectedLatex="";
                     dispatch(TYPE(mathField.latex()))
                 }
                 else if(modifying===true){
                     let nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
                     while(!firstWhileFinished){
-                        while(!isMqnonleaf(nowCursorElement.nextSibling)) {
+                        while(!isBinaryOperator(nowCursorElement.nextSibling) && !isMqnonleaf(nowCursorElement.nextSibling)) {
                             mathField.keystroke('Left');
                             nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
                         }
@@ -87,5 +92,8 @@ const isMqnonleaf = (nowCursor) => {
     return nowCursor!==null && nowCursor.className.includes("mq-non-leaf");
 }
 
+const isBinaryOperator = (nowCursor) => {
+    return binaryOperator = (nowCursor!==null && nowCursor.className.includes("mq-binary-operator"));
+}
 
 export default withStyles(useStyles)(EditableField)
