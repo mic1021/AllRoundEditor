@@ -1,5 +1,5 @@
 import React from 'react';
-import EquationList from './components/textAreaComponents/EquationList';
+import EquationListContainer from './components/EquationListContainer';
 import TextArea from './components/TextArea';
 
 import './App.css';
@@ -8,7 +8,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <EquationList></EquationList>
+        <EquationListContainer></EquationListContainer>
         <TextArea></TextArea>
       </div>
     );

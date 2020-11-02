@@ -11,7 +11,7 @@ export default class EquationListContainer extends React.Component {
             checked: []
         }    
         this.toggleChecked = this.toggleChecked.bind(this);
-        this.push = this.push.bind(this);
+        this.pushFalse = this.pushFalse.bind(this);
     }
 
     toggleChecked = (index) => (event) => {
@@ -30,7 +30,7 @@ export default class EquationListContainer extends React.Component {
         }
     }
 
-    push = () => {
+    pushFalse = () => {
         this.setState(state => {
             state.checked.push(false);
         })
@@ -41,7 +41,7 @@ export default class EquationListContainer extends React.Component {
             <div>
                 <EquationList 
                     toggleChecked={this.toggleChecked}
-                    push={this.push}
+                    pushFalse={this.pushFalse}
                     checked={this.state.checked}
                 > </EquationList>
                 <BottomNavigation

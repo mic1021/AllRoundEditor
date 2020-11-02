@@ -30,7 +30,7 @@ function BottomToolbarRow(props){
     );
   }
 
-  getItemJSX(this.props.row);
+  const items = getItemJSX(props.row);
 
   return(
     <>

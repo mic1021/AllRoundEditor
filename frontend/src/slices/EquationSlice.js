@@ -7,7 +7,12 @@ export const EquationSlice = createSlice({
     name: 'equations',
     initialState: {
         latex: "",
-        equations: []
+        equations: [
+            "x + 3 = 3",
+            "x + 1 = 2",
+            "x + 5 = 3"
+        ],
+        edit: null
     },
     reducers: {
         TYPE: (state, action) => {
@@ -15,13 +20,20 @@ export const EquationSlice = createSlice({
             console.log(state.latex);
         },
         SUBMIT: (state, action) => {
-            if (action.payload === 'NEW') {
+            console.log(action.payload);
+            if (action.payload === undefined) {
+                console.log("FUCK");
                 state.equations.push(state.latex);   
+            } else {
+                console.log("FUCK 2");
+                state.equations[action.payload] = state.latex;
             }
-            else state.equations[action.payload] = state.latex;
+            console.log("ME");
             state.latex = "";
+            state.edit = null;
         },
         EDIT: (state, action) => {
+            state.edit = action.payload;
             state.latex = state.data[action.payload].equation;
         },
         DELETE: (state, action) => {
