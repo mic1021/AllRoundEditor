@@ -28,6 +28,8 @@ export default class EquationListContainer extends React.Component {
                 ]
             })
         }
+        console.log(index);
+        console.log(this.state.checked);
     }
 
     pushFalse = () => {

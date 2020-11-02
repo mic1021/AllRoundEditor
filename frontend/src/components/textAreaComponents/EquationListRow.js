@@ -22,13 +22,17 @@ function EquationListRow(props) {
 
     const handleClose = (e) => {
         setAnchorEl(null);
-        //if(e.target.value === 'EDIT') this.dispatch(EDIT(Number(this.props.key)));
+        console.log(e.target.textContent);
+        if(e.target.textContent === 'EDIT') {
+            console.log(props.index);
+            dispatch(EDIT(props.index));
+        }
         //if(e.target.value === 'DELETE') this.dispatch(DELETE());
     }
      
     return (
         <ListItem
-            key={props.key}
+            key={props.index}
             role={undefined}
             dense
             button
@@ -57,8 +61,8 @@ function EquationListRow(props) {
                     keepMounted
                     onClose={handleClose}
                 >
-                    <MenuItem onClick={handleClose}>Edit</MenuItem>
-                    <MenuItem onClick={handleClose}>Delete</MenuItem>
+                    <MenuItem onClick={handleClose}>EDIT</MenuItem>
+                    <MenuItem onClick={handleClose}>DELETE</MenuItem>
                 </Menu>
             </ListItemSecondaryAction>
         </ListItem>

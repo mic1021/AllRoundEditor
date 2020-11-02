@@ -18,12 +18,13 @@ function EquationList(props) {
 
     const rows = [];
     equations.forEach((equation, index) => {
+        console.log(index);
         props.pushFalse();
         rows.push(
             <EquationListRow
                 equation={[equation, props.checked[index]]}
                 toggleChecked={props.toggleChecked(index)}
-                key={index}
+                index={index}
             ></EquationListRow>
         );
     })

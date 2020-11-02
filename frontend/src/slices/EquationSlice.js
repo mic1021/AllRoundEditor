@@ -17,24 +17,20 @@ export const EquationSlice = createSlice({
     reducers: {
         TYPE: (state, action) => {
             state.latex = action.payload;
-            console.log(state.latex);
         },
-        SUBMIT: (state, action) => {
-            console.log(action.payload);
-            if (action.payload === undefined) {
-                console.log("FUCK");
+        SUBMIT: state => {
+            if (state.edit === null) {
                 state.equations.push(state.latex);   
             } else {
-                console.log("FUCK 2");
-                state.equations[action.payload] = state.latex;
+                state.equations[state.edit] = state.latex;
             }
-            console.log("ME");
             state.latex = "";
             state.edit = null;
         },
         EDIT: (state, action) => {
             state.edit = action.payload;
-            state.latex = state.data[action.payload].equation;
+            //console.log(state.edit);
+            state.latex = state.equations[action.payload];
         },
         DELETE: (state, action) => {
             //ACTION.PAYLOAD IS INDEX VALUE
