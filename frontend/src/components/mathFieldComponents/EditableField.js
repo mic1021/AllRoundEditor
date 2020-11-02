@@ -16,11 +16,9 @@ function EditableField(props){
     const latex = useSelector(selectLatex);
     const dispatch = useDispatch();
     const editableField = useRef();
-    const {classes} = props;
 
     const handleChange = (mathField) => {
         // Called everytime the input changes
-        //console.log(mathField.latex());
         let nowCursor = editableField.current.getElementsByClassName('mq-hasCursor')[0];
         if(nowCursor !== undefined){
             if(modifying===false && nowCursor.innerText[0] === "\\"){
@@ -71,7 +69,6 @@ function EditableField(props){
     return (
         <div ref={editableField}>
         <EditableMathField
-            className={classes.root}
             latex={latex}
             onChange={handleChange}
         />
