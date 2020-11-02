@@ -9,12 +9,12 @@ import IconButton from '@material-ui/core/IconButton';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { StaticMathField } from 'react-mathquill';
 import { TOGGLE, EDIT, DELETE, selectChecked } from '../../slices/EquationSlice';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function EquationListRow(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const checked = useSelector(selectChecked, shallowEqual);
+    const checked = useSelector(selectChecked);
     console.log(checked);
     const dispatch = useDispatch();
 
