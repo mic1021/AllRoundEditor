@@ -8,12 +8,14 @@ import CheckBox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { StaticMathField } from 'react-mathquill';
-import { EDIT, DELETE } from '../../slices/EquationSlice';
-import { useDispatch } from 'react-redux';
+import { TOGGLE, EDIT, DELETE, selectChecked } from '../../slices/EquationSlice';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function EquationListRow(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
+    const checked = useSelector(selectChecked, shallowEqual);
+    console.log(checked);
     const dispatch = useDispatch();
 
     const handleClick = (e) => {
@@ -22,12 +24,17 @@ function EquationListRow(props) {
 
     const handleClose = (e) => {
         setAnchorEl(null);
-        console.log(e.target.textContent);
         if(e.target.textContent === 'EDIT') {
-            console.log(props.index);
             dispatch(EDIT(props.index));
         }
-        //if(e.target.value === 'DELETE') this.dispatch(DELETE());
+        if(e.target.textContent === 'DELETE') {
+            dispatch(DELETE(props.index));
+            console.log("EH");
+        }
+    }
+    
+    const toggleChecked = (e) => {
+        dispatch(TOGGLE(props.index));
     }
      
     return (
@@ -36,12 +43,12 @@ function EquationListRow(props) {
             role={undefined}
             dense
             button
-            onClick={props.toggleChecked}
+            onClick={toggleChecked}
         >
             <ListItemIcon>
                 <CheckBox
                     edge="start"
-                    checked={props.checked}
+                    checked={checked[props.index]}
                     tabIndex="-1"
                     disableRipple
                 >
