@@ -1,10 +1,8 @@
 import React,{useRef} from 'react';
 import { EditableMathField} from 'react-mathquill';
 import { makeStyles } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectLatex, TYPE } from '../../slices/EquationSlice';
-import { useForkRef } from '@material-ui/core';
 
 const useStyles = makeStyles({
     root: {
@@ -18,14 +16,12 @@ function EditableField(props){
     const latex = useSelector(selectLatex);
     const dispatch = useDispatch();
     const editableField = useRef();
-    const {classes} = props;
 
     const handleChange = (mathField) => {
         // Called everytime the input changes
-        //console.log(mathField.latex());
         let nowCursor = editableField.current.getElementsByClassName('mq-hasCursor')[0];
         if(nowCursor !== undefined){
-            if(modifying===false && nowCursor.innerText[0] == "\\"){
+            if(modifying===false && nowCursor.innerText[0] === "\\"){
                 selectedLatex=showAutoCompleteAndSelect(nowCursor.innerText);
             }   
             if(selectedLatex!==""){
@@ -73,7 +69,6 @@ function EditableField(props){
     return (
         <div ref={editableField}>
         <EditableMathField
-            className={classes.root}
             latex={latex}
             onChange={handleChange}
         />
@@ -96,4 +91,4 @@ const isBinaryOperator = (nowCursor) => {
     return binaryOperator = (nowCursor!==null && nowCursor.className.includes("mq-binary-operator"));
 }
 
-export default withStyles(useStyles)(EditableField)
+export default EditableField
