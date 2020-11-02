@@ -45,12 +45,12 @@ function EditableField(props){
                 else if(modifying===true){
                     let nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
                     while(!firstWhileFinished){
-                        while(!isBinaryOperator(nowCursorElement.nextSibling) && !isMqnonleaf(nowCursorElement.nextSibling)) {
-                            mathField.keystroke('Left');
-                            nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
+                        if(isBinaryOperator(nowCursorElement.nextSibling) || isMqnonleaf(nowCursorElement.nextSibling)){
+                            firstWhileFinished=true;
+                            break;
                         }
-                        firstWhileFinished=true;
-                        break;
+                        mathField.keystroke('Left');
+                        nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
                     }
                     while(!secondWhileFinished){
                         mathField.keystroke('Left');
