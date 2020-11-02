@@ -21,12 +21,34 @@ const BottomToolbarBox = (props) => {
     }
   };
 
-  const getMathSymbol = (_latex, _fontSize = '300%') => {
-    return <><StaticMathField style={{ fontSize: _fontSize }}>{_latex}</StaticMathField><div style={{ position: 'absolute', top: '80%' }}>{_latex}</div></>
+  const getMathSymbol = (_latex, text, _fontSize = '300%',_textSize='100%',_topPos='80%') => {
+    return <><StaticMathField style={{ fontSize: _fontSize }}>{_latex}</StaticMathField><div style={{ fontSize: _textSize, position: 'absolute', top: _topPos }}>{text}</div></>
   };
 
-  const row = [getMathSymbol('\\frac{}{}', '200%'), getMathSymbol('\\sqrt{}'), getMathSymbol('\\sqrt[]{}'), getMathSymbol('\\int', '170%'), getMathSymbol('\\sum', '130%'), getMathSymbol('+', '400%'), getMathSymbol('-', '400%'), getMathSymbol('\\times', '400%'), getMathSymbol('\\div', '400%'), getMathSymbol('\\pm', '400%'), getMathSymbol('\\mp'), getMathSymbol('\\sin^{}')];
-  const latexs = ['\\sqrt{}', '\\sqrt[]{}', '\\frac{}{}', '+', '-', '\\times', '\\div', '\\pm', '\\mp', '\\int', '\\sum', '\\sin^{}', '\\cos^{}', '\\tan^{}', '', '', '', '', '', '', '', ''];
+  const row = [getMathSymbol('\\frac{}{}','\\frac','200%')
+  , getMathSymbol('\\sqrt{}','\\sqrt')
+  , getMathSymbol('\\sqrt[]{}','^{}\\sqrt')
+  , getMathSymbol('\\int', '\\int','170%')
+  , getMathSymbol('\\sum', '\\sum','130%')
+  , getMathSymbol('\\prod','\\prod','130%')
+  , getMathSymbol('x\\^{}','^','300%','150%','70%')
+  , getMathSymbol('x\\_{}','_','300%','150%','70%')
+  , getMathSymbol('\\times','\\times', '400%')
+  , getMathSymbol('\\div','\\div', '400%')
+  , getMathSymbol('\\pm','\\pm', '400%')
+  , getMathSymbol('\\mp','\\mp')
+  , getMathSymbol('\\cap','\\cap')
+  , getMathSymbol('\\cup','\\cup')
+  , getMathSymbol('\\varnothing','\\varnothing')
+  , getMathSymbol('\\oplus','\\oplus')
+  , getMathSymbol('\\otimes','\\otimes')
+  , getMathSymbol('\\subset','\\subset')
+  , getMathSymbol('\\supset','\\supset')
+  , getMathSymbol('\\le','\\le')
+  , getMathSymbol('\\ge','\\ge')
+  , getMathSymbol('\\therefore','\\therefore')
+  , getMathSymbol('\\wedge','\\wedge')
+  , getMathSymbol('\\vee','\\vee')];
   return (
     <Grid container spacing={1}>
       <BottomToolbarRow row={row}></BottomToolbarRow>
