@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const selectEquation = state => state.equations.equations
 export const selectLatex = state => state.equations.latex
+export const selectChecked = state => state.equations.checked
 
 export const EquationSlice = createSlice({
     name: 'equations',
@@ -12,17 +13,35 @@ export const EquationSlice = createSlice({
             "x + 1 = 2",
             "x + 5 = 3"
         ],
+        checked: [],
         edit: null
     },
     reducers: {
+        INITCHECK: state => {
+            state.checked = [];
+            state.equations.forEach(equation => {
+                state.checked.push(false);
+            });
+        },
+        TOGGLE: (state, action) => {
+            if (state.checked[action.payload] === false) state.checked[action.payload] = true;
+            else state.checked[action.payload] = false;
+        },
         TYPE: (state, action) => {
             state.latex = action.payload;
         },
         SUBMIT: state => {
             if (state.edit === null) {
-                state.equations.push(state.latex);   
+                state.equations.push(state.latex);
+                state.checked.push(false);
             } else {
                 state.equations[state.edit] = state.latex;
+                
+                /*
+                state.equations = immer.produce(state.equations, draft => {
+                    draft[state.edit] = state.latex;
+                })
+                */
             }
             state.latex = "";
             state.edit = null;
@@ -35,8 +54,9 @@ export const EquationSlice = createSlice({
         DELETE: (state, action) => {
             //ACTION.PAYLOAD IS INDEX VALUE
             //DELETE EQUATION
+            state.equations.splice(action.payload, 1);
+            state.checked.splice(action.payload, 1);
         },
-
         SAVE: (state, action) => {
             //ACTION.PAYLOAD IS AN ARRAY OF CHECKED LIST
             //SAVE TO BACKEND
@@ -44,7 +64,7 @@ export const EquationSlice = createSlice({
     }
 })
 
-export const { TYPE, SUBMIT, EDIT, DELETE } = EquationSlice.actions
+export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE } = EquationSlice.actions
 
 export default EquationSlice.reducer
 
