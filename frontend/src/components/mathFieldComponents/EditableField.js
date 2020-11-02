@@ -80,17 +80,11 @@ const showAutoCompleteAndSelect = (latexField) => {
     //사용자가 선택하지 않았을 경우(esc로 종료한 경우) 빈문자열을 반환
     return "\\frac";
 }
-const isText = (nowCursor) => {
-    return  nowCursor!==null && nowCursor.nodeValue==="\\";
-}
 const isCommandInput = (nowCursor) => {
     return nowCursor!==null && nowCursor.className.includes("mq-latex-command-input");
 }
 const isMqnonleaf = (nowCursor) => {
     return nowCursor!==null && nowCursor.className.includes("mq-non-leaf");
-}
-const getLatexField = (nowCursor) =>{
-    return nowCursor!==null && nowCursor.innerText;
 }
 
 
