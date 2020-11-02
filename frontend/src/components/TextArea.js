@@ -7,58 +7,39 @@ import IconButton from '@material-ui/core/IconButton';
 import PublishIcon from '@material-ui/icons/Publish';
 import BottomToolbarBox from './buttonGridComponents/BottomToolbarBox';
 import EditableField from './mathFieldComponents/EditableField';
-import store from '../store';
+import { useDispatch } from 'react-redux';
+import { SUBMIT } from '../slices/EquationSlice';
 
-export default class TextArea extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            latex: store.getState().latex
-        }
-        store.subscribe(function() {
-            this.setState({
-                latex: store.getState().latex
-            })
-        }.bind(this))
-        this.handleEnterPress = this.handleEnterPress.bind(this);
-        this.submit = this.submit.bind(this);
-    }
-    // action creator, 
-    submit = () => {
-        return {
-            type: 'SUBMIT',
-            payload: this.state.latex
-        }
-    }
+function TextArea(props){
+    const dispatch = useDispatch();
 
-    handleEnterPress = (clicked) => (event) => {
+    const handleEnterPress = (clicked) => (event) => {
         if(event.key==="enter" || clicked === "onClick") {
-            store.dispatch(this.submit());
+            dispatch(SUBMIT());
         }
-        console.log(store.getState());
     }
 
-    render() {
-        return(
-            <Accordion>
-                <AccordionSummary>
-                    <EditableField></EditableField>
-                    <FormControlLabel
-                        aria-label="Acknowledge"
-                        onClick={(event) => event.stopPropagation()}
-                        onFocus={(event) => event.stopPropagation()}
-                        control={
-                            <IconButton onClick={this.handleEnterPress("onClick")} onKeyPress={this.handleEnterPress}>
-                                <PublishIcon></PublishIcon>
-                            </IconButton>
-                        }
-                    >
-                    </FormControlLabel>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <BottomToolbarBox></BottomToolbarBox>
-                </AccordionDetails>
-            </Accordion>
-        )
-    }
+    return(
+        <Accordion>
+            <AccordionSummary>
+                <EditableField></EditableField>
+                <FormControlLabel
+                    aria-label="Acknowledge"
+                    onClick={(event) => event.stopPropagation()}
+                    onFocus={(event) => event.stopPropagation()}
+                    control={
+                        <IconButton onClick={handleEnterPress("onClick")} onKeyPress={handleEnterPress}>
+                            <PublishIcon></PublishIcon>
+                        </IconButton>
+                    }
+                >
+                </FormControlLabel>
+            </AccordionSummary>
+            <AccordionDetails>
+                <BottomToolbarBox></BottomToolbarBox>
+            </AccordionDetails>
+        </Accordion>
+    )
 }
+
+export default TextArea;
