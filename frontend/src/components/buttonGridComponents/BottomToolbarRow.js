@@ -2,7 +2,7 @@ import React from 'react';
 import { Button , Grid} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectLatex, TYPE } from '../../slices/EquationSlice';
+import { selectCursor, selectLatex, TYPE } from '../../slices/EquationSlice';
 
 const styles = {
   root:{
@@ -21,20 +21,26 @@ const styles = {
 
 function BottomToolbarRow(props){
 
+  let currentLatex = useSelector(selectLatex);
+  let currentCursorPosition = useSelector(selectCursor);
   const dispatch = useDispatch();
-  const latex = useSelector(selectLatex);
   const getItemJSX = (items) => {
     const {classes} = props;
     return items.map(
       (item) => {
         return <Grid item className = {classes.root} xs={3} sm={2} md={2} lg={1} xl={1}>
           <Button className={classes.button} 
-            onClick={(e) => {dispatch(TYPE(latex+(item.props.children[0].props.children)))}} fullWidth>
+            onClick={buttonClickEvent(item,currentCursorPosition,currentLatex)} fullWidth>
             {item}
           </Button>
           </Grid>
       }
     );
+  }
+
+  const buttonClickEvent = (item,currentCursorPosition,currentLatex) => (e) => {
+    currentLatex = currentLatex.substr(0,currentCursorPosition)+item.props.children[0].props.children+"{}"+currentLatex.substr(currentCursorPosition);
+    dispatch(TYPE(currentLatex));
   }
 
   const items = getItemJSX(props.row);

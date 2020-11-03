@@ -2,7 +2,7 @@ import React,{useRef} from 'react';
 import { EditableMathField} from 'react-mathquill';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectLatex, TYPE } from '../../slices/EquationSlice';
+import { selectLatex, TYPE, CURSOR} from '../../slices/EquationSlice';
 
 const useStyles = makeStyles({
     root: {
@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     },
 });
 
-let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedLatex="",binaryOperator=false;
+let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedLatex="",binaryOperator=false,written=false,deleteCnt=0,cur=0;
 
 function EditableField(props){
     const latex = useSelector(selectLatex);
@@ -61,9 +61,31 @@ function EditableField(props){
                 }
             }
             else {
-                dispatch(TYPE(mathField.latex()))
+                if(!written){
+                    written=true;
+                    mathField.write('!@#');
+                }
+                else{
+                    if(deleteCnt<3){
+                        if(deleteCnt===0) {
+                            cur = mathField.latex().indexOf("!@#");
+                        }
+                        deleteCnt++;
+                        mathField.keystroke('Backspace');
+                    }
+                    else{
+                        written=false;
+                        deleteCnt=0;
+                        dispatch(CURSOR(cur));
+                        dispatch(TYPE(mathField.latex()))
+                    }
+                }
             }
         }
+    }
+
+    const updateCursorPosition = (e) => {
+        console.log(e);
     }
 
     return (
@@ -71,6 +93,7 @@ function EditableField(props){
         <EditableMathField
             latex={latex}
             onChange={handleChange}
+            onClick={updateCursorPosition}
         />
         </div>
     )
