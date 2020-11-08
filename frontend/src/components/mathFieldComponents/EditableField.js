@@ -11,6 +11,7 @@ const useStyles = makeStyles({
 });
 
 let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedLatex="",binaryOperator=false,written=false,deleteCnt=0,cur=0;
+let localMathField;
 
 function EditableField(props){
     const latex = useSelector(selectLatex);
@@ -18,6 +19,7 @@ function EditableField(props){
     const editableField = useRef();
 
     const handleChange = (mathField) => {
+        localMathField = mathField;
         // Called everytime the input changes
         let nowCursor = editableField.current.getElementsByClassName('mq-hasCursor')[0];
         if(nowCursor !== undefined){
@@ -86,6 +88,9 @@ function EditableField(props){
 
     const updateCursorPosition = (e) => {
         console.log(e);
+        if(localMathField!==undefined) {
+            handleChange(localMathField);
+        }
     }
 
     return (
