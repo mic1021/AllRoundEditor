@@ -23,7 +23,9 @@ function TextArea(props){
     return(
         <Accordion>
             <AccordionSummary>
-                <Box padding="10px 20px 10px 10px" height="25%" width="auto">
+                <Box padding="10px 20px 10px 10px" height="25%" width="auto"
+                onClick={(event) => event.stopPropagation()}
+                onFocus={(event) => event.stopPropagation()}>
                  <EditableField></EditableField>
                 </Box>
                 <FormControlLabel
