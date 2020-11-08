@@ -38,7 +38,7 @@ function EditableField(props){
                         binaryOperator=false;
                     }
                     selectedLatex="";
-                    dispatch(TYPE(mathField.latex()))
+                    dispatch(TYPE(mathField.latex()));
                 }
                 else if(modifying===true){
                     let nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
@@ -79,7 +79,7 @@ function EditableField(props){
                         written=false;
                         deleteCnt=0;
                         dispatch(CURSOR(cur));
-                        dispatch(TYPE(mathField.latex()))
+                        dispatch(TYPE(mathField.latex()));
                     }
                 }
             }
@@ -87,7 +87,6 @@ function EditableField(props){
     }
 
     const updateCursorPosition = (e) => {
-        console.log(e);
         if(localMathField!==undefined) {
             handleChange(localMathField);
         }
