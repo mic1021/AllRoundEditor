@@ -9,6 +9,7 @@ import BottomToolbarBox from './buttonGridComponents/BottomToolbarBox';
 import EditableField from './mathFieldComponents/EditableField';
 import { useDispatch } from 'react-redux';
 import { SUBMIT } from '../slices/EquationSlice';
+import { Box} from '@material-ui/core';
 
 function TextArea(props){
     const dispatch = useDispatch();
@@ -22,7 +23,9 @@ function TextArea(props){
     return(
         <Accordion>
             <AccordionSummary>
-                <EditableField></EditableField>
+                <Box padding="10px 20px 10px 10px" height="25%" width="auto">
+                 <EditableField></EditableField>
+                </Box>
                 <FormControlLabel
                     aria-label="Acknowledge"
                     onClick={(event) => event.stopPropagation()}
