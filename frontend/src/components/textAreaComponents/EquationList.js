@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import List from '@material-ui/core/List';
 import EquationListRow from './EquationListRow';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector} from 'react-redux';
 import { selectEquation, INITCHECK } from '../../slices/EquationSlice';
+import { uid } from 'react-uid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,7 +19,9 @@ function EquationList(props) {
     const dispatch = useDispatch();
     const rows = [];
 
-    dispatch(INITCHECK());
+    useEffect(() => {
+        dispatch(INITCHECK());
+    }, [dispatch]);
 
     equations.forEach((equation, index) => {
         console.log(equation);
@@ -26,6 +29,7 @@ function EquationList(props) {
             <EquationListRow
                 equation={equation}
                 index={index}
+                key={uid(equation)}
             ></EquationListRow>
         );
     })
