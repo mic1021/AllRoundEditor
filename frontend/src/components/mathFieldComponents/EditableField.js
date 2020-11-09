@@ -1,8 +1,9 @@
 import React,{useRef} from 'react';
-import { EditableMathField} from 'react-mathquill';
+import { EditableMathField } from 'react-mathquill';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectLatex, TYPE, CURSOR} from '../../slices/EquationSlice';
+import { selectLatex, TYPE, CURSOR } from '../../slices/EquationSlice';
+import EquationSuggestionModal from './EquationSuggestionModal';
 
 const useStyles = makeStyles({
     root: {
@@ -13,10 +14,19 @@ const useStyles = makeStyles({
 let modifying=false,firstWhileFinished=false,secondWhileFinished=false,selectedLatex="",binaryOperator=false,written=false,deleteCnt=0,cur=0;
 let localMathField;
 
-function EditableField(props){
+function EditableField(props) {
     const latex = useSelector(selectLatex);
     const dispatch = useDispatch();
     const editableField = useRef();
+    const [showModal, setShowModal] = React.useState(false);
+
+    const showAutoCompleteAndSelect = (latexField) => {
+      //\로 시작하면 해당 글자에 해당하는 수식 후보군을 모달창에 보여주고, 사용자가 선택한 수식을 반환
+      //사용자가 선택하지 않았을 경우(esc로 종료한 경우) 빈문자열을 반환
+      setShowModal(true);
+
+      //return '\\frac';
+    }
 
     const handleChange = (mathField) => {
         localMathField = mathField;
@@ -92,20 +102,22 @@ function EditableField(props){
         }
     }
 
+    const modalOff = (selectedValue) => (e) => {
+      console.log(selectedValue);
+      console.log(e);
+      setShowModal(false);
+    }
+
     return (
         <div ref={editableField}>
-        <EditableMathField
+          <EditableMathField
             latex={latex}
             onChange={handleChange}
             onClick={updateCursorPosition}
-        />
+          />
+          {showModal && <EquationSuggestionModal text={selectedLatex} modalOff={modalOff}></EquationSuggestionModal>}
         </div>
     )
-}
-const showAutoCompleteAndSelect = (latexField) => {
-    //\로 시작하면 해당 글자에 해당하는 수식 후보군을 모달창에 보여주고, 사용자가 선택한 수식을 반환
-    //사용자가 선택하지 않았을 경우(esc로 종료한 경우) 빈문자열을 반환
-    return "\\frac";
 }
 const isCommandInput = (nowCursor) => {
     return nowCursor!==null && nowCursor.className.includes("mq-latex-command-input");

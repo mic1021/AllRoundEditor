@@ -1,0 +1,28 @@
+const latexEquations = [
+    {name: 'Fraction', equation: '\\frac{}{}', text: 'frac'},
+    {name: 'Square Root', equation: '\\sqrt{}', text: 'sqrt'},
+    {name: 'Square Root 2', equation: '\\sqrt[]{}', text: 'sqrt'},
+    {name: 'Integration', equation: '\\int', text: 'int'},
+    {name: 'Summation', equation: '\\sum', text: 'sum'},
+    {name: 'Pi-Product', equation: '\\prod', text: 'prod'},
+    {name: 'Power', equation: 'x\\^{}', text: '^'},
+    {name: 'Underscore', equation: 'x\\_{}', text: '_'},
+    {name: 'Multiplication', equation: '\\times', text: 'times'},
+    {name: 'Division', equation: '\\div', text: 'div'},
+    {name: 'Plus-Minus', equation: '\\pm', text: 'pm'},
+    {name: 'Minus-Plus', equation: '\\mp', text: 'mp'},
+    {name: 'Intersection', equation: '\\cap', text: 'cap'},
+    {name: 'Union', equation: '\\cup', text: 'cup'},
+    {name: 'Null', equation: '\\varnothing', text: 'varnothing'},
+    {name: 'XOR', equation: '\\oplus', text: 'oplus'},
+    {name: 'OTimes', equation: '\\otimes', text: 'otimes'},
+    {name: 'Subset', equation: '\\subset', text: 'subset'},
+    {name: 'Supset', equation: '\\supset', text: 'supset'},
+    {name: 'Less Than or Equal To', equation: '\\le', text: 'le'},
+    {name: 'Greater Than or Equal To', equation: '\\ge', text: 'ge'},
+    {name: 'Therefore', equation: '\\therefore', text: 'therefore'},
+    {name: 'Wedge', equation: '\\wedge', text: 'wedge'},
+    {name: 'Vee', equation: '\\vee', text: 'vee'},
+];
+
+export default latexEquations;
