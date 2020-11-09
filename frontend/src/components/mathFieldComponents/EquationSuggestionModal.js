@@ -7,6 +7,8 @@ import latexEquations from '../../equations/Equations';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { toggleDialogue } from '../../slices/EquationSlice';
   
 function getModalStyle() {
     const top = 50;
@@ -35,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EquationSuggestionModal(props){
     const classes = useStyles();
+    const dispatch = useDispatch();
     const [rows, setRows] = React.useState([]);
     const [modalStyle] = React.useState(getModalStyle);
     const [search, setSearch] = React.useState('');
@@ -43,21 +46,20 @@ export default function EquationSuggestionModal(props){
     const textFieldRef = useRef();
     const listRef = useRef();
 
-    
-
     const handleChange = (event) => {
         setSearch(event.target.value);
     }
 
     const handleKeyDown = (event) => {
-        console.log('key: ' + event.key);
-        console.log('keyCode: ' + event.keyCode);
-        console.log('maxIndex: ' + maxIndex);
-        console.log('selectedIndex: ' + selectedIndex);
+        // console.log('key: ' + event.key);
+        // console.log('keyCode: ' + event.keyCode);
+        // console.log('maxIndex: ' + maxIndex);
+        // console.log('selectedIndex: ' + selectedIndex);
         if(event.keyCode === 13) {
             if (selectedIndex <= maxIndex) {
                 // console.log(latexEquations[selectedIndex].equation);
-                props.modalOff(latexEquations[selectedIndex].equation);
+                // props.modalOff(latexEquations[selectedIndex].equation);
+                dispatch(toggleDialogue(latexEquations[selectedIndex].equation))
             }
         } else if (event.keyCode === 38) { // ArrowUp
             if (selectedIndex > 0) setSelectedIndex(selectedIndex - 1);
@@ -65,8 +67,12 @@ export default function EquationSuggestionModal(props){
             if (selectedIndex < maxIndex) setSelectedIndex(selectedIndex + 1);
             else setSelectedIndex(maxIndex + 1);
         } else if (event.keyCode === 27) { // Escape
-            // props.modalOff('');
+            handleClose();
         }
+    }
+
+    const handleClose = (event) => {
+        dispatch(toggleDialogue(''));
     }
 
     useEffect(() => {
@@ -87,9 +93,6 @@ export default function EquationSuggestionModal(props){
         if (selectedIndex > max) {
             setSelectedIndex(max);
         }
-        return () => {
-            console.log("unmounted");
-        };
     }, [search, selectedIndex])
 
     // const consoleLog = (e) => {
@@ -100,7 +103,7 @@ export default function EquationSuggestionModal(props){
     return(
         <Dialog
             open={true}
-            onClose={props.modalOff(props.modalOff(latexEquations[selectedIndex].equation))}
+            onClose={handleClose}
             disableAutoFocus={true}
             maxWidth={'sm'}
             fullWidth
