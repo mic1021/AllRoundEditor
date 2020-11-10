@@ -7,8 +7,8 @@ import latexEquations from '../../equations/Equations';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { toggleDialogue } from '../../slices/EquationSlice';
+import { useSelector,useDispatch } from 'react-redux';
+import { selectLatex,toggleDialogue,selectCursor,TYPE} from '../../slices/EquationSlice';
 
 function getModalStyle() {
     const top = 50;
@@ -34,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+let modifiedLatex="";
+
 export default function EquationSuggestionModal(props){
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -44,6 +46,8 @@ export default function EquationSuggestionModal(props){
     const [maxIndex, setMaxIndex] = React.useState(0);
     const textFieldRef = useRef();
     const listRef = useRef();
+    const latex = useSelector(selectLatex);
+    const cur = useSelector(selectCursor);
 
     const handleChange = (event) => {
         setSearch(event.target.value);
@@ -58,7 +62,20 @@ export default function EquationSuggestionModal(props){
             if (selectedIndex>=0 && selectedIndex <= maxIndex) {
                 // console.log(latexEquations[selectedIndex].equation);
                 // props.modalOff(latexEquations[selectedIndex].equation);
-                dispatch(toggleDialogue(latexEquations[selectedIndex].equation))
+                let i=0;
+                let selectedText = rows[selectedIndex].props.children;
+                for(;i<latexEquations.length;++i){
+                    if(latexEquations[i].text.localeCompare(selectedText)==0){
+                        dispatch(toggleDialogue(latexEquations[i].equation));
+                        modifiedLatex = latex.substr(0,cur)+latexEquations[i].equation+latex.substr(cur);
+                        dispatch(TYPE(modifiedLatex));
+                        break;
+                    }
+                }
+                if(i==latexEquations.length){
+                    console.log("Not Reached!");
+                    dispatch(toggleDialogue(''));
+                }
             }
             else{
                 dispatch(toggleDialogue(''));
@@ -77,8 +94,8 @@ export default function EquationSuggestionModal(props){
 
     useEffect(() => {
         let max = -1;
-        setRows(latexEquations.map((data, index) => {
-            let equations = [];
+        let equations = [];
+        latexEquations.map((data, index) => {
             if (data.text.indexOf(search) > -1) {
                 max+=1;
                 equations.push(
@@ -87,8 +104,8 @@ export default function EquationSuggestionModal(props){
                     </ListItem>
                 );
             }
-            return equations;
-        }))
+        })
+        setRows(equations);
         setMaxIndex(max);
         if (selectedIndex > max) {
             setSelectedIndex(max);
