@@ -56,18 +56,19 @@ export default function EquationSuggestionModal(props){
         // console.log('maxIndex: ' + maxIndex);
         // console.log('selectedIndex: ' + selectedIndex);
         if(event.keyCode === 13) {
-            if (selectedIndex <= maxIndex) {
+            if (selectedIndex>=0 && selectedIndex <= maxIndex) {
                 // console.log(latexEquations[selectedIndex].equation);
                 // props.modalOff(latexEquations[selectedIndex].equation);
                 dispatch(toggleDialogue(latexEquations[selectedIndex].equation))
+            }
+            else{
+                dispatch(toggleDialogue(''));
             }
         } else if (event.keyCode === 38) { // ArrowUp
             if (selectedIndex > 0) setSelectedIndex(selectedIndex - 1);
         } else if (event.keyCode === 40) { // ArrowDown
             if (selectedIndex < maxIndex) setSelectedIndex(selectedIndex + 1);
             else setSelectedIndex(maxIndex + 1);
-        } else if (event.keyCode === 27) { // Escape
-            handleClose();
         }
     }
 
@@ -83,7 +84,7 @@ export default function EquationSuggestionModal(props){
                 max+=1;
                 equations.push(
                     <ListItem key={index} selected={selectedIndex === max}>
-                        {data.equation}
+                        {data.text}
                     </ListItem>
                 );
             }
