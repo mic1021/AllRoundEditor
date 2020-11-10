@@ -7,23 +7,22 @@ import latexEquations from '../../equations/Equations';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { toggleDialogue } from '../../slices/EquationSlice';
-  
+import { useSelector,useDispatch } from 'react-redux';
+import { selectLatex,toggleDialogue,selectCursor,TYPE} from '../../slices/EquationSlice';
+
 function getModalStyle() {
     const top = 50;
     const left = 50;
-  
     return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-      position: 'absolute',
-      overflow: 'auto',
-      height: 300,
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+        position: 'absolute',
+        overflow: 'auto',
+        height: 300,
     };
 }
-  
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
@@ -35,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+let modifiedLatex="";
+
 export default function EquationSuggestionModal(props){
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -45,6 +46,8 @@ export default function EquationSuggestionModal(props){
     const [maxIndex, setMaxIndex] = React.useState(0);
     const textFieldRef = useRef();
     const listRef = useRef();
+    const latex = useSelector(selectLatex);
+    const cur = useSelector(selectCursor);
 
     const handleChange = (event) => {
         setSearch(event.target.value);
@@ -56,18 +59,32 @@ export default function EquationSuggestionModal(props){
         // console.log('maxIndex: ' + maxIndex);
         // console.log('selectedIndex: ' + selectedIndex);
         if(event.keyCode === 13) {
-            if (selectedIndex <= maxIndex) {
+            if (selectedIndex>=0 && selectedIndex <= maxIndex) {
                 // console.log(latexEquations[selectedIndex].equation);
                 // props.modalOff(latexEquations[selectedIndex].equation);
-                dispatch(toggleDialogue(latexEquations[selectedIndex].equation))
+                let i=0;
+                let selectedText = rows[selectedIndex].props.children;
+                for(;i<latexEquations.length;++i){
+                    if(latexEquations[i].text.localeCompare(selectedText)==0){
+                        dispatch(toggleDialogue(latexEquations[i].equation));
+                        modifiedLatex = latex.substr(0,cur)+latexEquations[i].equation+latex.substr(cur);
+                        dispatch(TYPE(modifiedLatex));
+                        break;
+                    }
+                }
+                if(i==latexEquations.length){
+                    console.log("Not Reached!");
+                    dispatch(toggleDialogue(''));
+                }
+            }
+            else{
+                dispatch(toggleDialogue(''));
             }
         } else if (event.keyCode === 38) { // ArrowUp
             if (selectedIndex > 0) setSelectedIndex(selectedIndex - 1);
         } else if (event.keyCode === 40) { // ArrowDown
             if (selectedIndex < maxIndex) setSelectedIndex(selectedIndex + 1);
             else setSelectedIndex(maxIndex + 1);
-        } else if (event.keyCode === 27) { // Escape
-            handleClose();
         }
     }
 
@@ -77,18 +94,18 @@ export default function EquationSuggestionModal(props){
 
     useEffect(() => {
         let max = -1;
-        setRows(latexEquations.map((data, index) => {
-            let equations = [];
+        let equations = [];
+        latexEquations.map((data, index) => {
             if (data.text.indexOf(search) > -1) {
                 max+=1;
                 equations.push(
                     <ListItem key={index} selected={selectedIndex === max}>
-                        {data.equation}
+                        {data.text}
                     </ListItem>
                 );
             }
-            return equations;
-        }))
+        })
+        setRows(equations);
         setMaxIndex(max);
         if (selectedIndex > max) {
             setSelectedIndex(max);

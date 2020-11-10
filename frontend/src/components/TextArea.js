@@ -23,10 +23,12 @@ function TextArea(props){
     return(
         <Accordion>
             <AccordionSummary>
-                <Box padding="10px 20px 10px 10px" height="25%" width="auto"
+                <Box bgcolor="#81c147" margin = "0px 30px 0px 30px" padding="10px 10px 10px 10px"
                 onClick={(event) => event.stopPropagation()}
                 onFocus={(event) => event.stopPropagation()}>
-                 <EditableField></EditableField>
+                    <Box bgcolor="white" width="auto">
+                        <EditableField></EditableField>
+                    </Box>
                 </Box>
                 <FormControlLabel
                     aria-label="Acknowledge"
