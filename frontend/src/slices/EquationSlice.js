@@ -4,6 +4,8 @@ export const selectEquation = state => state.equations.equations
 export const selectLatex = state => state.equations.latex
 export const selectChecked = state => state.equations.checked
 export const selectCursor = state => state.equations.cursor
+export const selectShowDialogue = state => state.equations.showDialogue
+export const selectMathCmd = state => state.equations.mathCmd
 
 export const EquationSlice = createSlice({
     name: 'equations',
@@ -16,7 +18,9 @@ export const EquationSlice = createSlice({
         ],
         checked: [],
         edit: null,
-        cursor: 0
+        cursor: 0,
+        showDialogue: false,
+        latexCmd: '',
     },
     reducers: {
         INITCHECK: state => {
@@ -65,11 +69,15 @@ export const EquationSlice = createSlice({
         },
         CURSOR: (state,action) => {
             state.cursor = action.payload;
-        }
+        },
+        toggleDialogue: (state, action) => {
+            state.showDialogue = !(state.showDialogue);
+            state.mathCmd = action.payload;
+        },
     }
 })
 
-export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE ,CURSOR,SAVE} = EquationSlice.actions
+export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE, CURSOR, SAVE, toggleDialogue} = EquationSlice.actions
 
 export default EquationSlice.reducer
 

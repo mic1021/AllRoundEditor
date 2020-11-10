@@ -1,8 +1,8 @@
-import React,{useRef} from 'react';
+import React,{useEffect, useRef} from 'react';
 import { EditableMathField } from 'react-mathquill';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectLatex, TYPE, CURSOR } from '../../slices/EquationSlice';
+import { selectLatex, TYPE, CURSOR, selectShowDialogue, selectMathCmd, toggleDialogue } from '../../slices/EquationSlice';
 import EquationSuggestionModal from './EquationSuggestionModal';
 
 const useStyles = makeStyles({
@@ -16,14 +16,21 @@ let localMathField;
 
 function EditableField(props) {
     const latex = useSelector(selectLatex);
+    const mathCmd = useSelector(selectMathCmd);
+    const showDialogue = useSelector(selectShowDialogue);
     const dispatch = useDispatch();
     const editableField = useRef();
-    const [showModal, setShowModal] = React.useState(false);
+
+    useEffect(() => {
+        if (mathCmd !== '') {
+            //dispatch(TYPE())
+        }
+    }, [showDialogue, mathCmd]);
 
     const showAutoCompleteAndSelect = (latexField) => {
       //\로 시작하면 해당 글자에 해당하는 수식 후보군을 모달창에 보여주고, 사용자가 선택한 수식을 반환
       //사용자가 선택하지 않았을 경우(esc로 종료한 경우) 빈문자열을 반환
-      setShowModal(true);
+      dispatch(toggleDialogue(''));
 
       //return '\\frac';
     }
@@ -102,12 +109,6 @@ function EditableField(props) {
         }
     }
 
-    const modalOff = (selectedValue) => (e) => {
-      console.log(selectedValue);
-      console.log(e);
-      setShowModal(false);
-    }
-
     return (
         <div ref={editableField}>
           <EditableMathField
@@ -115,7 +116,7 @@ function EditableField(props) {
             onChange={handleChange}
             onClick={updateCursorPosition}
           />
-          {showModal && <EquationSuggestionModal text={selectedLatex} modalOff={modalOff}></EquationSuggestionModal>}
+          {showDialogue && <EquationSuggestionModal text={selectedLatex}></EquationSuggestionModal>}
         </div>
     )
 }
