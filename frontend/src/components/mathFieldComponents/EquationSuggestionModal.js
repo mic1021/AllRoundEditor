@@ -9,21 +9,20 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { toggleDialogue } from '../../slices/EquationSlice';
-  
+
 function getModalStyle() {
     const top = 50;
     const left = 50;
-  
     return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-      position: 'absolute',
-      overflow: 'auto',
-      height: 300,
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+        position: 'absolute',
+        overflow: 'auto',
+        height: 300,
     };
 }
-  
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
