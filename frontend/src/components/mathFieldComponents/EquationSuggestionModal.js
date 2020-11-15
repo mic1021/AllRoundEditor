@@ -9,6 +9,9 @@ import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core';
 import { useSelector,useDispatch } from 'react-redux';
 import { selectLatex,toggleDialogue,selectCursor,TYPE} from '../../slices/EquationSlice';
+import { addStyles, StaticMathField } from 'react-mathquill';
+
+addStyles();
 
 function getModalStyle() {
     const top = 50;
@@ -31,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(0, 0, 0),
+    },
+    textField: {
+        padding: "0 30px 0 30px",
     },
 }));
 
@@ -63,7 +69,7 @@ export default function EquationSuggestionModal(props){
                 // console.log(latexEquations[selectedIndex].equation);
                 // props.modalOff(latexEquations[selectedIndex].equation);
                 let i=0;
-                let selectedText = rows[selectedIndex].props.children;
+                let selectedText = rows[selectedIndex].props.children[0];
                 for(;i<latexEquations.length;++i){
                     if(latexEquations[i].text.localeCompare(selectedText)==0){
                         dispatch(toggleDialogue(latexEquations[i].equation));
@@ -125,16 +131,16 @@ export default function EquationSuggestionModal(props){
             maxWidth={'sm'}
             fullWidth
         >
-            <DialogContent>
-                <TextField 
-                    value={search}
-                    onChange={handleChange}
-                    onKeyDown={handleKeyDown}
-                    autoFocus
-                    margin="dense"
-                    fullWidth
-                    ref={textFieldRef}
-                />
+            <TextField 
+                value={search}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                autoFocus
+                className={classes.textField}
+                inputProps={{style: {fontSize: 30}}} // font size of input text
+                InputLabelProps={{style: {fontSize: 30, padding: 30}}} // font size of input label
+            />
+            <DialogContent ref={equationFieldRef}>
                 <Box height={300} width="100%">
                     <List>
                         {rows}
