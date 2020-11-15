@@ -41,19 +41,12 @@ export const EquationSlice = createSlice({
                 state.checked.push(false);
             } else {
                 state.equations[state.edit] = state.latex;
-                
-                /*
-                state.equations = immer.produce(state.equations, draft => {
-                    draft[state.edit] = state.latex;
-                })
-                */
             }
             state.latex = "";
             state.edit = null;
         },
         EDIT: (state, action) => {
             state.edit = action.payload;
-            //console.log(state.edit);
             state.latex = state.equations[action.payload];
         },
         DELETE: (state, action) => {

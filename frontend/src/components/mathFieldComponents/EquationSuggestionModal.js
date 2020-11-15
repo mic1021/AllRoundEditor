@@ -60,14 +60,8 @@ export default function EquationSuggestionModal(props){
     }
 
     const handleKeyDown = (event) => {
-        // console.log('key: ' + event.key);
-        // console.log('keyCode: ' + event.keyCode);
-        // console.log('maxIndex: ' + maxIndex);
-        // console.log('selectedIndex: ' + selectedIndex);
         if(event.keyCode === 13) {
             if (selectedIndex>=0 && selectedIndex <= maxIndex) {
-                // console.log(latexEquations[selectedIndex].equation);
-                // props.modalOff(latexEquations[selectedIndex].equation);
                 let i=0;
                 let selectedText = rows[selectedIndex].props.children[0];
                 for(;i<latexEquations.length;++i){
@@ -118,11 +112,6 @@ export default function EquationSuggestionModal(props){
         }
     }, [search, selectedIndex])
 
-    // const consoleLog = (e) => {
-    //     console.log('key: ' + e.key);
-    //     console.log('keyCode: ' + e.keyCode);
-    // }
-
     return(
         <Dialog
             open={true}
@@ -137,8 +126,8 @@ export default function EquationSuggestionModal(props){
                 onKeyDown={handleKeyDown}
                 autoFocus
                 className={classes.textField}
-                inputProps={{style: {fontSize: 30}}} // font size of input text
-                InputLabelProps={{style: {fontSize: 30, padding: 30}}} // font size of input label
+                inputProps={{style: {fontSize: 30}}}
+                InputLabelProps={{style: {fontSize: 30, padding: 30}}}
             />
             <DialogContent ref={equationFieldRef}>
                 <Box height={300} width="100%">
