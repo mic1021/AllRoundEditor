@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core';
 import { useSelector,useDispatch } from 'react-redux';
-import { selectLatex,toggleDialogue,selectCursor,TYPE} from '../../slices/EquationSlice';
+import { selectLatex,toggleDialogue,selectCursor} from '../../slices/EquationSlice';
 import { addStyles, StaticMathField } from 'react-mathquill';
 
 addStyles();
@@ -50,8 +50,6 @@ export default function EquationSuggestionModal(props){
     const [search, setSearch] = React.useState('');
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [maxIndex, setMaxIndex] = React.useState(0);
-    const textFieldRef = useRef();
-    const listRef = useRef();
     const equationFieldRef = useRef();
     const latex = useSelector(selectLatex);
     const cur = useSelector(selectCursor);
