@@ -2,7 +2,7 @@ import React,{useEffect, useRef} from 'react';
 import { EditableMathField } from 'react-mathquill';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectLatex, TYPE, CURSOR, selectShowDialogue, selectMathCmd, toggleDialogue } from '../../slices/EquationSlice';
+import { selectLatex, TYPE, CURSOR, selectShowDialogue, selectMathCmd, toggleDialogue, selectCursor, MATHCMD} from '../../slices/EquationSlice';
 import EquationSuggestionModal from './EquationSuggestionModal';
 
 const useStyles = makeStyles({
@@ -21,10 +21,12 @@ function EditableField(props) {
     const showDialogue = useSelector(selectShowDialogue);
     const dispatch = useDispatch();
     const editableField = useRef();
+    cur = useSelector(selectCursor);
 
     useEffect(() => {
-        if (mathCmd !== '') {
-            //dispatch(TYPE())
+        if (mathCmd !== '' && mathCmd != undefined) {
+            dispatch(TYPE(latex.substr(0,cur)+mathCmd+latex.substr(cur)));
+            dispatch(MATHCMD(''));
         }
     }, [showDialogue, mathCmd]);
 
@@ -32,7 +34,6 @@ function EditableField(props) {
         localMathField = mathField;
         // Called everytime the input changes
         let nowCursor = editableField.current.getElementsByClassName('mq-hasCursor')[0];
-        if (nowCursor !== undefined) {
             //if(selectedLatex!==""){
             //     if(modifying===false && isCommandInput(nowCursor)){
             //         modifying=true;
@@ -70,6 +71,7 @@ function EditableField(props) {
             //     }
             //}
             //else {
+        if (mathField !== undefined && nowCursor !== undefined) {
             if (!written) {
                 written = true;
                 mathField.write('!@#');
