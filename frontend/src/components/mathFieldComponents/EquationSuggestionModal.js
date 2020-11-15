@@ -122,6 +122,10 @@ export default function EquationSuggestionModal(props){
         dispatch(toggleDialogue(''));
     }
 
+    const selectEquationOnClick = (index) => (e) => {
+        dispatch(toggleDialogue(latexEquations[index].equation));
+    }
+
     useEffect(() => {
         let max = -1;
         let equations = [];
@@ -129,7 +133,10 @@ export default function EquationSuggestionModal(props){
             if (data.text.indexOf(search) > -1) {
                 max+=1;
                 equations.push(
-                    <ListItem key={index} selected={selectedIndex === max}>
+                    <ListItem button 
+                    key={index} selected={selectedIndex === max}
+                    onClick={ selectEquationOnClick(index)}
+                    >
                         {data.text}
                     </ListItem>
                 );
