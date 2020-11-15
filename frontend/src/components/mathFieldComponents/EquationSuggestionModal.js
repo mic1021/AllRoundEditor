@@ -138,6 +138,7 @@ export default function EquationSuggestionModal(props){
                     onClick={ selectEquationOnClick(index)}
                     >
                         {data.text}
+                        <StaticMathField style={{ fontSize: String(Number(data.fontSize.substr(0,data.fontSize.length-1))/2).concat("%") }}>{data.equation}</StaticMathField>
                     </ListItem>
                 );
             }
