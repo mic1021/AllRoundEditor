@@ -52,11 +52,36 @@ export default function EquationSuggestionModal(props){
     const [maxIndex, setMaxIndex] = React.useState(0);
     const textFieldRef = useRef();
     const listRef = useRef();
+    const equationFieldRef = useRef();
     const latex = useSelector(selectLatex);
     const cur = useSelector(selectCursor);
 
     const handleChange = (event) => {
         setSearch(event.target.value);
+    }
+
+    const moveScrollDown = (index) => {
+        let equationButtonList = equationFieldRef.current.getElementsByClassName("MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button");
+        let sumHeight=0;
+        for(let i=0;i<=index;++i){
+            sumHeight += equationButtonList[i].clientHeight;
+        }
+        let currentPosition = sumHeight - equationFieldRef.current.scrollTop;
+        if(currentPosition > equationFieldRef.current.clientHeight){
+            equationFieldRef.current.scrollTop += equationButtonList[index].clientHeight;
+        }
+    }
+
+    const moveScrollUp = (index) => {
+        let equationButtonList = equationFieldRef.current.getElementsByClassName("MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button");
+        let sumHeight=0;
+        for(let i=0;i<=index;++i){
+            sumHeight += equationButtonList[i].clientHeight;
+        }
+        let currentPosition = sumHeight - equationFieldRef.current.scrollTop;
+        if(currentPosition < 0){
+            equationFieldRef.current.scrollTop -= equationButtonList[index].clientHeight;
+        }
     }
 
     const handleKeyDown = (event) => {
@@ -68,7 +93,6 @@ export default function EquationSuggestionModal(props){
                     if(latexEquations[i].text.localeCompare(selectedText)==0){
                         dispatch(toggleDialogue(latexEquations[i].equation));
                         modifiedLatex = latex.substr(0,cur)+latexEquations[i].equation+latex.substr(cur);
-                        dispatch(TYPE(modifiedLatex));
                         break;
                     }
                 }
@@ -81,9 +105,15 @@ export default function EquationSuggestionModal(props){
                 dispatch(toggleDialogue(''));
             }
         } else if (event.keyCode === 38) { // ArrowUp
-            if (selectedIndex > 0) setSelectedIndex(selectedIndex - 1);
+            if (selectedIndex > 0) {
+                setSelectedIndex(selectedIndex - 1);
+                moveScrollUp(selectedIndex-1);
+            }
         } else if (event.keyCode === 40) { // ArrowDown
-            if (selectedIndex < maxIndex) setSelectedIndex(selectedIndex + 1);
+            if (selectedIndex < maxIndex) {
+                setSelectedIndex(selectedIndex + 1);
+                moveScrollDown(selectedIndex+1);
+            }
             else setSelectedIndex(maxIndex + 1);
         }
     }
