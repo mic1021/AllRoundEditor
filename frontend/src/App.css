@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.mq-root-block {
+  vertical-align: super !important;
+}
+
+.mq-editable-field {
+  border: unset !important;
+  box-shadow: none !important;
+  font-size: 30px !important;
+  width: 100% !important;
+}
+
+.MuiButtonBase-root.MuiAccordionSummary-root {
+  padding: 0px 0px 0px 0px !important;
+  align-items: unset !important;
+}

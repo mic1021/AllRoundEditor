@@ -23,6 +23,7 @@ export const EquationSlice = createSlice({
         showDialogue: false,
         latexCmd: '',
         loggedIn: false,
+        showDialogue: false
     },
     reducers: {
         INITCHECK: state => {
@@ -44,19 +45,12 @@ export const EquationSlice = createSlice({
                 state.checked.push(false);
             } else {
                 state.equations[state.edit] = state.latex;
-                
-                /*
-                state.equations = immer.produce(state.equations, draft => {
-                    draft[state.edit] = state.latex;
-                })
-                */
             }
             state.latex = "";
             state.edit = null;
         },
         EDIT: (state, action) => {
             state.edit = action.payload;
-            //console.log(state.edit);
             state.latex = state.equations[action.payload];
         },
         DELETE: (state, action) => {
@@ -78,11 +72,14 @@ export const EquationSlice = createSlice({
         },
         LOGIN: state => {
             state.loggedIn = !(state.loggedIn);
+        },
+        MATHCMD: (state,action) => {
+            state.mathCmd = action.payload;
         }
     }
 })
 
-export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE, CURSOR, SAVE, toggleDialogue, LOGIN } = EquationSlice.actions
+export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE, CURSOR, SAVE, toggleDialogue, LOGIN, MATHCMD } = EquationSlice.actions
 
 export default EquationSlice.reducer
 
