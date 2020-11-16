@@ -1,0 +1,38 @@
+[debug] [2020-11-16T04:31:49.313Z] ----------------------------------------------------------------------
+[debug] [2020-11-16T04:31:49.316Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\hjkim\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2020-11-16T04:31:49.316Z] CLI Version:   8.16.1
+[debug] [2020-11-16T04:31:49.316Z] Platform:      win32
+[debug] [2020-11-16T04:31:49.316Z] Node Version:  v10.16.0
+[debug] [2020-11-16T04:31:49.317Z] Time:          Mon Nov 16 2020 13:31:49 GMT+0900 (GMT+09:00)
+[debug] [2020-11-16T04:31:49.318Z] ----------------------------------------------------------------------
+[debug] [2020-11-16T04:31:49.318Z] 
+[debug] [2020-11-16T04:31:49.338Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-11-16T04:31:49.339Z] > authorizing via signed-in user
+[debug] [2020-11-16T04:31:49.339Z] [iam] checking project allroundeditor-dcc51 for permissions ["firebase.projects.get"]
+[debug] [2020-11-16T04:31:49.343Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-11-16T04:31:49.343Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-11-16T04:31:49.950Z] <<< HTTP RESPONSE 200 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","date":"Mon, 16 Nov 2020 04:31:50 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-11-16T04:31:49.965Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/allroundeditor-dcc51:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-11-16T04:31:51.410Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 16 Nov 2020 04:31:52 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=819","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-11-16T04:31:51.411Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/allroundeditor-dcc51  
+ 
+[debug] [2020-11-16T04:31:52.398Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 16 Nov 2020 04:31:53 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Serving from 'D:\SCHOOL\8th Semester\Capstone Design II\Naver\AllRoundEditor\frontend'...
+[info] 
+[debug] [2020-11-16T04:31:52.403Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/allroundeditor-dcc51/webApps/-/config  
+ 
+[debug] [2020-11-16T04:31:53.918Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 16 Nov 2020 04:31:54 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  hosting: Serving hosting files from: public {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mpublic\u001b[22m"}}
+[info] +  hosting: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}
+[warn] !  Your requested "node" version "12" doesn't match your global version "10" {"metadata":{"emulator":{"name":"functions"},"message":"Your requested \"node\" version \"12\" doesn't match your global version \"10\""}}
+[debug] [2020-11-16T04:31:54.534Z] defaultcredentials: writing to file C:\Users\hjkim\AppData\Roaming\firebase\hjkim0822_gmail_com_application_default_credentials.json
+[debug] [2020-11-16T04:31:54.536Z] Setting GAC to C:\Users\hjkim\AppData\Roaming\firebase\hjkim0822_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\hjkim\\AppData\\Roaming\\firebase\\hjkim0822_gmail_com_application_default_credentials.json"}}
+[info] i  functions: Watching "D:\SCHOOL\8th Semester\Capstone Design II\Naver\AllRoundEditor\frontend\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"D:\\SCHOOL\\8th Semester\\Capstone Design II\\Naver\\AllRoundEditor\\frontend\\functions\" for Cloud Functions..."}}
+[debug] [2020-11-16T04:31:54.560Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2020-11-16T04:31:54.560Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2020-11-16T04:31:54.560Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2020-11-16T04:31:54.561Z] [worker-~diagnostic~-d8225f54-7d96-4287-af5b-d64217965b4a]: Assigning socketPath: \\?\pipe\D:\SCHOOL\8th Semester\Capstone Design II\Naver\AllRoundEditor\frontend\functions\11316 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-d8225f54-7d96-4287-af5b-d64217965b4a]: Assigning socketPath: \\\\?\\pipe\\D:\\SCHOOL\\8th Semester\\Capstone Design II\\Naver\\AllRoundEditor\\frontend\\functions\\11316"}}
+[debug] [2020-11-16T04:31:54.561Z] [worker-~diagnostic~-d8225f54-7d96-4287-af5b-d64217965b4a]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-d8225f54-7d96-4287-af5b-d64217965b4a]: BUSY"}}

@@ -6,6 +6,7 @@ export const selectChecked = state => state.equations.checked
 export const selectCursor = state => state.equations.cursor
 export const selectShowDialogue = state => state.equations.showDialogue
 export const selectMathCmd = state => state.equations.mathCmd
+export const selectLoggedIn = state => state.equations.loggedIn
 
 export const EquationSlice = createSlice({
     name: 'equations',
@@ -21,11 +22,12 @@ export const EquationSlice = createSlice({
         cursor: 0,
         showDialogue: false,
         latexCmd: '',
+        loggedIn: false,
     },
     reducers: {
         INITCHECK: state => {
             state.checked = [];
-            state.equations.forEach(equation => {
+            state.equations.forEach(() => {
                 state.checked.push(false);
             });
         },
@@ -74,10 +76,13 @@ export const EquationSlice = createSlice({
             state.showDialogue = !(state.showDialogue);
             state.mathCmd = action.payload;
         },
+        LOGIN: state => {
+            state.loggedIn = !(state.loggedIn);
+        }
     }
 })
 
-export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE, CURSOR, SAVE, toggleDialogue} = EquationSlice.actions
+export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE, CURSOR, SAVE, toggleDialogue, LOGIN } = EquationSlice.actions
 
 export default EquationSlice.reducer
 

@@ -36,6 +36,7 @@ function EditableField(props) {
     }
 
     const handleChange = (mathField) => {
+        console.log(latex);
         localMathField = mathField;
         // Called everytime the input changes
         let nowCursor = editableField.current.getElementsByClassName('mq-hasCursor')[0];
