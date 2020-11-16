@@ -13,3 +13,4 @@ frontend/yarn.lock
 frontend/package-lock.json
 frontend/README.md
 frontend/package.json
+frontend/functions/firebase-debug.log
