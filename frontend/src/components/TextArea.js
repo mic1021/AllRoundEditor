@@ -10,6 +10,7 @@ import EditableField from './mathFieldComponents/EditableField';
 import { useDispatch } from 'react-redux';
 import { SUBMIT } from '../slices/EquationSlice';
 import { Box} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function TextArea(props){
     const dispatch = useDispatch();
@@ -22,11 +23,11 @@ function TextArea(props){
 
     return(
         <Accordion>
-            <AccordionSummary>
-                <Box bgcolor="#81c147" margin = "0px 30px 0px 30px" padding="10px 10px 10px 10px"
-                onClick={(event) => event.stopPropagation()}
-                onFocus={(event) => event.stopPropagation()}>
-                    <Box bgcolor="white" width="auto">
+            <AccordionSummary style={{ flexDirection: "column" }} expandIcon={<ExpandMoreIcon />}>
+                <Box bgcolor="#81c147" width="100%" margin="0px 30px 0px 30px" padding="10px 10px 10px 10px"
+                    onClick={(event) => event.stopPropagation()}
+                    onFocus={(event) => event.stopPropagation()}>
+                    <Box bgcolor="white" padding="10px 0px 0px 0px">
                         <EditableField></EditableField>
                     </Box>
                 </Box>
