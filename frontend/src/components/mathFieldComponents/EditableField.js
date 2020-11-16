@@ -2,7 +2,7 @@ import React,{useEffect, useRef} from 'react';
 import { EditableMathField } from 'react-mathquill';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectLatex, TYPE, CURSOR, selectShowDialogue, selectMathCmd, toggleDialogue } from '../../slices/EquationSlice';
+import { selectLatex, TYPE, CURSOR, selectShowDialogue, selectMathCmd, toggleDialogue, selectCursor, MATHCMD} from '../../slices/EquationSlice';
 import EquationSuggestionModal from './EquationSuggestionModal';
 
 const useStyles = makeStyles({
@@ -11,7 +11,6 @@ const useStyles = makeStyles({
     },
 });
 
-//let modifying = false, firstWhileFinished = false, secondWhileFinished = false, binaryOperator = false, written = false, deleteCnt = 0, cur = 0;
 let written = false, deleteCnt = 0, cur = 0;
 let localMathField;
 
@@ -21,55 +20,19 @@ function EditableField(props) {
     const showDialogue = useSelector(selectShowDialogue);
     const dispatch = useDispatch();
     const editableField = useRef();
+    cur = useSelector(selectCursor);
 
     useEffect(() => {
-        if (mathCmd !== '') {
-            //dispatch(TYPE())
+        if (mathCmd !== '' && mathCmd != undefined) {
+            dispatch(TYPE(latex.substr(0,cur)+mathCmd+latex.substr(cur)));
+            dispatch(MATHCMD(''));
         }
     }, [showDialogue, mathCmd]);
 
     const handleChange = (mathField) => {
         localMathField = mathField;
-        // Called everytime the input changes
         let nowCursor = editableField.current.getElementsByClassName('mq-hasCursor')[0];
-        if (nowCursor !== undefined) {
-            //if(selectedLatex!==""){
-            //     if(modifying===false && isCommandInput(nowCursor)){
-            //         modifying=true;
-            //         mathField.cmd(selectedLatex);
-            //         modifying=false;
-            //         firstWhileFinished=false;
-            //         secondWhileFinished=false;
-            //         if(binaryOperator){
-            //             mathField.keystroke('Right');
-            //             binaryOperator=false;
-            //         }
-            //         selectedLatex="";
-            //         dispatch(TYPE(mathField.latex()));
-            //     }
-            //     else if(modifying===true){
-            //         let nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
-            //         while(!firstWhileFinished){
-            //             if(isBinaryOperator(nowCursorElement.nextSibling) || isMqnonleaf(nowCursorElement.nextSibling)){
-            //                 firstWhileFinished=true;
-            //                 break;
-            //             }
-            //             mathField.keystroke('Left');
-            //             nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
-            //         }
-            //         while(!secondWhileFinished){
-            //             mathField.keystroke('Left');
-            //             nowCursorElement = editableField.current.getElementsByClassName('mq-cursor')[0];
-            //             if(isCommandInput(nowCursorElement.nextSibling)) {
-            //                 secondWhileFinished=true;
-            //             }
-            //             mathField.keystroke('Right');
-            //             mathField.keystroke('Backspace');
-            //             break;
-            //         }
-            //     }
-            //}
-            //else {
+        if (mathField !== undefined && nowCursor !== undefined) {
             if (!written) {
                 written = true;
                 mathField.write('!@#');
@@ -90,7 +53,6 @@ function EditableField(props) {
                     dispatch(TYPE(mathField.latex()));
                 }
             }
-            //}
         }
     }
 
@@ -120,15 +82,5 @@ function EditableField(props) {
         </div>
     )
 }
-// const isCommandInput = (nowCursor) => {
-//     return nowCursor !== null && nowCursor.className.includes("mq-latex-command-input");
-// }
-// const isMqnonleaf = (nowCursor) => {
-//     return nowCursor !== null && nowCursor.className.includes("mq-non-leaf");
-// }
-
-// const isBinaryOperator = (nowCursor) => {
-//     return binaryOperator = (nowCursor !== null && nowCursor.className.includes("mq-binary-operator"));
-// }
 
 export default EditableField
