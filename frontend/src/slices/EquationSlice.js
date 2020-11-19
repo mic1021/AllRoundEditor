@@ -22,8 +22,7 @@ export const EquationSlice = createSlice({
         cursor: 0,
         showDialogue: false,
         latexCmd: '',
-        loggedIn: false,
-        showDialogue: false
+        loggedIn: false
     },
     reducers: {
         INITCHECK: state => {
@@ -33,7 +32,7 @@ export const EquationSlice = createSlice({
             });
         },
         TOGGLE: (state, action) => {
-            if (state.checked[action.payload] === false) state.checked[action.payload] = true;
+            if (state.checked[action.payload] === false || state.checked[action.payload] === undefined) state.checked[action.payload] = true;
             else state.checked[action.payload] = false;
         },
         TYPE: (state, action) => {
