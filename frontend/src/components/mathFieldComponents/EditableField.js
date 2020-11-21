@@ -4,6 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectLatex, TYPE, CURSOR, selectShowDialogue, selectMathCmd, toggleDialogue, selectCursor, MATHCMD} from '../../slices/EquationSlice';
 import EquationSuggestionModal from './EquationSuggestionModal';
 
+const placeHolder="press\\ backslash(\\backslash)\\ to\\ search\\ math\\ symbols";
+
+const useStyles = makeStyles({
+    root: {
+        width: '100%',
+    },
+});
+
 let written = false, deleteCnt = 0, cur = 0;
 let localMathField;
 
@@ -28,7 +36,13 @@ function EditableField(props) {
         if (mathField !== undefined && nowCursor !== undefined) {
             if (!written) {
                 written = true;
-                mathField.write('!@#');
+                try{
+                    mathField.write('!@#');
+                }
+                catch(e){
+                    console.log(e);
+                    written=false;
+                }
             }
             else {
                 if (deleteCnt < 3) {
@@ -41,9 +55,11 @@ function EditableField(props) {
                 else {
                     written = false;
                     deleteCnt = 0;
-
+                    let currentLatex=mathField.latex();
+                    let idx = currentLatex.indexOf(placeHolder);
+                    if(idx!=-1) currentLatex = currentLatex.substr(0,idx)+currentLatex.substr(idx+placeHolder.length);
                     dispatch(CURSOR(cur));
-                    dispatch(TYPE(mathField.latex()));
+                    dispatch(TYPE(currentLatex));
                 }
             }
         }
@@ -66,7 +82,7 @@ function EditableField(props) {
     return (
         <div ref={editableField}>
             <EditableMathField
-                latex={latex}
+                latex={latex==""?placeHolder:latex}
                 onChange={handleChange}
                 onClick={updateCursorPosition}
                 onKeyDown={handleKeyDown}
