@@ -15,7 +15,6 @@ function EquationListRow(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const checked = useSelector(selectChecked);
-    console.log(checked);
     const dispatch = useDispatch();
 
     const handleClick = (e) => {
@@ -29,7 +28,6 @@ function EquationListRow(props) {
         }
         if(e.target.textContent === 'DELETE') {
             dispatch(DELETE(props.index));
-            console.log("EH");
         }
     }
     
@@ -48,7 +46,7 @@ function EquationListRow(props) {
             <ListItemIcon>
                 <CheckBox
                     edge="start"
-                    checked={checked[props.index]}
+                    checked={checked[props.index]===undefined?false:checked[props.index]}
                     tabIndex="-1"
                     disableRipple
                 >

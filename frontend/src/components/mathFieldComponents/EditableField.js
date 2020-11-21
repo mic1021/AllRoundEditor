@@ -1,6 +1,5 @@
 import React,{useEffect, useRef} from 'react';
 import { EditableMathField } from 'react-mathquill';
-import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectLatex, TYPE, CURSOR, selectShowDialogue, selectMathCmd, toggleDialogue, selectCursor, MATHCMD} from '../../slices/EquationSlice';
 import EquationSuggestionModal from './EquationSuggestionModal';
@@ -25,14 +24,13 @@ function EditableField(props) {
     cur = useSelector(selectCursor);
 
     useEffect(() => {
-        if (mathCmd !== '' && mathCmd != undefined) {
+        if (mathCmd !== '' && mathCmd !== undefined) {
             dispatch(TYPE(latex.substr(0,cur)+mathCmd+latex.substr(cur)));
             dispatch(MATHCMD(''));
         }
-    }, [showDialogue, mathCmd]);
+    }, [showDialogue, mathCmd,latex,dispatch]);
 
     const handleChange = (mathField) => {
-        console.log(latex);
         localMathField = mathField;
         let nowCursor = editableField.current.getElementsByClassName('mq-hasCursor')[0];
         if (mathField !== undefined && nowCursor !== undefined) {
@@ -74,9 +72,9 @@ function EditableField(props) {
     }
 
     const handleKeyDown = (e) => {
-        if (e.keyCode == '37' || e.keyCode == '39') { // left right
+        if (Number(e.keyCode)===37 || Number(e.keyCode) === 39) { // left right
             handleChange(localMathField);
-        } else if (e.keyCode == '220') {     // backslash
+        } else if (Number(e.keyCode) === 220) {     // backslash
             dispatch(toggleDialogue(''));
         }
     }
