@@ -38,7 +38,13 @@ function EditableField(props) {
         if (mathField !== undefined && nowCursor !== undefined) {
             if (!written) {
                 written = true;
-                mathField.write('!@#');
+                try{
+                    mathField.write('!@#');
+                }
+                catch(e){
+                    console.log(e);
+                    written=false;
+                }
             }
             else {
                 if (deleteCnt < 3) {
