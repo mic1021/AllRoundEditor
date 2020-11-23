@@ -10,7 +10,7 @@ export default function SavedEquations() { // frequentlyUsed(history) & Saved
     const loggedIn = useSelector(selectLoggedIn);
     useEffect(() => {
       if (loggedIn) {
-        axios.get('http://localhost:5001/allroundeditor-dcc51/asia-northeast3/api/signup/favEquations')
+        axios.get('http://localhost:5001/allroundeditor-dcc51/asia-northeast3/api/favEquation')
             .then(res => {
                 console.log("Request Success in log")
                 console.log(res.data);

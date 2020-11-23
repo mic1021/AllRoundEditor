@@ -14,12 +14,16 @@ export default function Header() {
     const [token, setToken] = useState('');
     const [authenticated, setAuthenticated] = useState(false);
     const loggedIn = useSelector(selectLoggedIn);
+
+    const isExpired = (token) => token.exp * 1000 < Date.now()
+
     useEffect(() => {
             if (loggedIn === true) {
                 const token = localStorage.getItem('FBIdToken');
                 const decodedToken = jwtDecode(token);
                 console.log(token);
                 setToken(token);
+
                 if(token) {
                     if (decodedToken.exp * 1000 < Date.now()) {
                         setAuthenticated(false);
