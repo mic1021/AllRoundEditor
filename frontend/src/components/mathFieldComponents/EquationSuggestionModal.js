@@ -127,7 +127,12 @@ export default function EquationSuggestionModal(props){
     useEffect(() => {
         let max = -1;
         let equations = [];
-        latexEquations.map((data, index) => {
+        let equationsRow = [];
+        for(let equationArray of latexEquations){
+            equationsRow.push.apply(equationsRow,equationArray);
+            console.log(equationArray[0].text);
+        }
+        equationsRow.map((data, index) => {
             if (data.text.indexOf(search) > -1) {
                 max+=1;
                 equations.push(
