@@ -43,12 +43,36 @@
 
 .mq-editable-field {
   border: unset !important;
-  box-shadow: none !important;
+  box-shadow: unset !important;
   font-size: 30px !important;
   width: 100% !important;
 }
 
-.MuiButtonBase-root.MuiAccordionSummary-root {
-  padding: 0px 0px 0px 0px !important;
-  align-items: unset !important;
+.MuiAccordionSummary-root {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.MuiAccordionSummary-content {
+  margin: 0 !important;
+}
+
+.MuiAccordionSummary-expandIcon {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  padding-top: 0 !important;
+}
+
+.MuiAccordionSummary-expandIcon.Mui-expanded {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  margin-bottom: 12px !important;
+}
+
+.MuiAccordion-root.Mui-expanded {
+  margin: 0 0 0 0 !important;
+}
+
+.MuiAccordionSummary-root.Mui-expanded {
+  min-height: unset !important;
 }

@@ -20,11 +20,10 @@ function EquationList(props) {
     const rows = [];
 
     useEffect(() => {
-        dispatch(INITCHECK());
+        dispatch(INITCHECK);
     }, [dispatch]);
 
     equations.forEach((equation, index) => {
-        console.log(equation);
         rows.push(
             <EquationListRow
                 equation={equation}

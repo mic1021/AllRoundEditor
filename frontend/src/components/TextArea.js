@@ -22,8 +22,9 @@ function TextArea(props){
     }
 
     return(
+        <>
         <Accordion>
-            <AccordionSummary style={{ flexDirection: "column" }} expandIcon={<ExpandMoreIcon />}>
+            <AccordionSummary>
                 <Box bgcolor="#81c147" width="100%" margin="0px 30px 0px 30px" padding="10px 10px 10px 10px"
                     onClick={(event) => event.stopPropagation()}
                     onFocus={(event) => event.stopPropagation()}>
@@ -43,10 +44,15 @@ function TextArea(props){
                 >
                 </FormControlLabel>
             </AccordionSummary>
+        </Accordion>
+        <Accordion>
+            <AccordionSummary style={{ flexDirection: "column" }} expandIcon={<ExpandMoreIcon />}>
+            </AccordionSummary>
             <AccordionDetails>
                 <BottomToolbarBox></BottomToolbarBox>
             </AccordionDetails>
         </Accordion>
+        </> 
     )
 }
 
