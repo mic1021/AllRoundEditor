@@ -52,3 +52,18 @@
   padding: 0px 0px 0px 0px !important;
   align-items: unset !important;
 }
+
+.MuiAccordionDetails-root {
+  padding: unset !important;
+}
+
+.MuiGrid-spacing-xs-1 {
+  width: 100% !important;
+  margin: unset !important;
+}
+
+.MuiTab-root {
+  width: 16.7% !important;
+  max-width: unset !important;
+  min-width: unset !important;
+}
