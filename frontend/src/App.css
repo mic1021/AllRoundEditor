@@ -91,3 +91,21 @@
   max-width: unset !important;
   min-width: unset !important;
 }
+
+.MuiList-padding {
+  padding: 0 !important;
+}
+
+.MuiDialogContent-root .mq-math-mode {
+  padding-top: 8px !important;
+}
+
+div.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.MuiDialogContent-root .mq-math-mode .mq-binary-operator {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
