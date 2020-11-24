@@ -32,7 +32,7 @@ const latexEquations = [
     {name: 'Not', equation: '\\sim', text: '\\not',fontSize: '300%',textSize: '100%',topPos: '80%'},
     {name: 'Conjunction', equation: '\\land', text: '\\and(confunction)',fontSize: '300%',textSize: '100%',topPos: '80%'},
     {name: 'Disjunction', equation: '\\lor', text: '\\or(disjunction)',fontSize: '300%',textSize: '100%',topPos: '80%'},
-    {name: 'XOR', equation: '\\oplus', text: '\\oplus',fontSize: '300%',textSize: '100%',topPos: '80%'},
+    {name: 'XOR', equation: '\\oplus', text: '\\xor',fontSize: '300%',textSize: '100%',topPos: '80%'},
     {name: 'True', equation: '\\top', text: '\\always-true',fontSize: '300%',textSize: '100%',topPos: '80%'},
     {name: 'False', equation: '\\bot', text: '\\always-false',fontSize: '300%',textSize: '100%',topPos: '80%'},
     {name: 'Exist', equation: '\\exists', text: '\\there exists',fontSize: '300%',textSize: '100%',topPos: '80%'},
