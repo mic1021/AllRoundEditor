@@ -40,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const allEquations = [];
+for(let equationArray of latexEquations){
+    allEquations.push.apply(allEquations,equationArray);
+}
 let modifiedLatex="";
 
 export default function EquationSuggestionModal(props){
@@ -87,14 +91,13 @@ export default function EquationSuggestionModal(props){
             if (selectedIndex>=0 && selectedIndex <= maxIndex) {
                 let i=0;
                 let selectedText = rows[selectedIndex].props.children[0];
-                for(;i<latexEquations.length;++i){
-                    if(latexEquations[i].text.localeCompare(selectedText)==0){
-                        dispatch(toggleDialogue(latexEquations[i].equation));
-                        modifiedLatex = latex.substr(0,cur)+latexEquations[i].equation+latex.substr(cur);
+                for(;i<allEquations.length;++i){
+                    if(allEquations[i].text.localeCompare(selectedText)===0){
+                        dispatch(toggleDialogue(allEquations[i].equation));
                         break;
                     }
                 }
-                if(i==latexEquations.length){
+                if(i===allEquations.length){
                     console.log("Not Reached!");
                     dispatch(toggleDialogue(''));
                 }
@@ -121,18 +124,13 @@ export default function EquationSuggestionModal(props){
     }
 
     const selectEquationOnClick = (index) => (e) => {
-        dispatch(toggleDialogue(latexEquations[index].equation));
+        dispatch(toggleDialogue(allEquations[index].equation));
     }
 
     useEffect(() => {
         let max = -1;
         let equations = [];
-        let equationsRow = [];
-        for(let equationArray of latexEquations){
-            equationsRow.push.apply(equationsRow,equationArray);
-            console.log(equationArray[0].text);
-        }
-        equationsRow.map((data, index) => {
+        allEquations.map((data, index) => {
             if (data.text.indexOf(search) > -1) {
                 max+=1;
                 equations.push(
@@ -145,6 +143,7 @@ export default function EquationSuggestionModal(props){
                     </ListItem>
                 );
             }
+            return data;
         })
         setRows(equations);
         setMaxIndex(max);

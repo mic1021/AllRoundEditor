@@ -101,12 +101,12 @@ function BottomToolbarRow(props){
           <Tab label="Set" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
-      <TabPanel row = {props.row[0]} value={value} index={0}> </TabPanel>
-      <TabPanel row = {props.row[1]} value={value} index={1}> </TabPanel>
-      <TabPanel row = {props.row[2]} value={value} index={2}> </TabPanel>
-      <TabPanel row = {props.row[3]} value={value} index={3}> </TabPanel>
-      <TabPanel row = {props.row[4]} value={value} index={4}> </TabPanel>
-      <TabPanel row = {props.row[5]} value={value} index={5}> </TabPanel>
+      <TabPanel alue="" row = {props.row[0]} value={value} index={0}> </TabPanel>
+      <TabPanel alue="" row = {props.row[1]} value={value} index={1}> </TabPanel>
+      <TabPanel alue="" row = {props.row[2]} value={value} index={2}> </TabPanel>
+      <TabPanel alue="" row = {props.row[3]} value={value} index={3}> </TabPanel>
+      <TabPanel alue="" row = {props.row[4]} value={value} index={4}> </TabPanel>
+      <TabPanel alue="" row = {props.row[5]} value={value} index={5}> </TabPanel>
     </div>
   );
 }
