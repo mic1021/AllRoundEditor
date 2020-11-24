@@ -37,7 +37,7 @@
   }
 }
 
-.mq-root-block {
+.mq-editable-field .mq-root-block {
   vertical-align: super !important;
 }
 
@@ -98,11 +98,6 @@
 
 .MuiDialogContent-root .mq-math-mode {
   padding-top: 8px !important;
-}
-
-div.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
 }
 
 .MuiDialogContent-root .mq-math-mode .mq-binary-operator {
