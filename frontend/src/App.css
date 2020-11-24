@@ -96,10 +96,6 @@
   padding: 0 !important;
 }
 
-.MuiDialogContent-root .mq-math-mode {
-  padding-top: 8px !important;
-}
-
 .MuiDialogContent-root .mq-math-mode .mq-binary-operator {
   padding-left: 0 !important;
   padding-right: 0 !important;
