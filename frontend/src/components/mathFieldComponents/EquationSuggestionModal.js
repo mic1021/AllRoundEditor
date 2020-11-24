@@ -84,13 +84,16 @@ export default function EquationSuggestionModal(props){
         if(currentPosition < 0){
             equationFieldRef.current.scrollTop -= equationButtonList[index].clientHeight;
         }
+        if(index==0){
+            equationFieldRef.current.scrollTop=0;
+        }
     }
 
     const handleKeyDown = (event) => {
         if(event.keyCode === 13) {
             if (selectedIndex>=0 && selectedIndex <= maxIndex) {
                 let i=0;
-                let selectedText = rows[selectedIndex].props.children[0];
+                let selectedText = rows[selectedIndex].props.children[0].props.children;
                 for(;i<allEquations.length;++i){
                     if(allEquations[i].text.localeCompare(selectedText)===0){
                         dispatch(toggleDialogue(allEquations[i].equation));
@@ -138,8 +141,12 @@ export default function EquationSuggestionModal(props){
                     key={index} selected={selectedIndex === max}
                     onClick={ selectEquationOnClick(index)}
                     >
-                        {data.text}
-                        <StaticMathField style={{ fontSize: String(Number(data.fontSize.substr(0,data.fontSize.length-1))/2).concat("%") }}>{data.equation}</StaticMathField>
+                        <span style={{display:'inline-block',height:'100%',width:'90%', verticalAlign:'middle',textAlign:'left'}}>
+                            {data.text}
+                        </span>
+                        <span style={{display:'inline-block',height:'100%',width:'10%', paddingLeft: '10%',verticalAlign:'middle',textAlign:'center'}}>
+                            <StaticMathField style={{ fontSize: String(Number(data.fontSize.substr(0,data.fontSize.length-1))/2).concat("%") }}>{data.equation}</StaticMathField>
+                        </span>
                     </ListItem>
                 );
             }
