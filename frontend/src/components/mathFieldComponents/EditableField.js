@@ -3,6 +3,7 @@ import { EditableMathField } from 'react-mathquill';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectLatex, TYPE, CURSOR, selectShowDialogue, selectMathCmd, toggleDialogue, selectCursor, MATHCMD} from '../../slices/EquationSlice';
 import EquationSuggestionModal from './EquationSuggestionModal';
+import { makeStyles } from '@material-ui/core';
 
 const placeHolder="press\\ backslash(\\backslash)\\ to\\ search\\ math\\ symbols";
 
