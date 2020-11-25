@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -5,7 +6,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { useSelector } from 'react-redux';
 import { selectLoggedIn } from '../../slices/EquationSlice';
 
-export default function SavedEquations() { // frequentlyUsed(history) & Saved
+export default function favEquations() { // frequentlyUsed(history) & Saved
     const [equations, setEquations] = useState([]);
     const loggedIn = useSelector(selectLoggedIn);
     useEffect(() => {
