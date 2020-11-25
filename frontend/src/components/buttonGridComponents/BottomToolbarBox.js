@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
 import { addStyles, StaticMathField } from 'react-mathquill';
 import BottomToolbarRow from './BottomToolbarRow';
 import latexEquations from '../../equations/Equations';
@@ -31,15 +30,17 @@ const BottomToolbarBox = () => {
     </>
   );
   const rows = [];
-  latexEquations.forEach(data => {
-    rows.push(getMathSymbol(data.equation, data.text,data.fontSize,data.textSize,data.topPos));
-
+  latexEquations.forEach(symbols => {
+    let tmp = [];
+    symbols.forEach(data => {
+      tmp.push(getMathSymbol(data.equation, data.text,data.fontSize,data.textSize,data.topPos));
+      return tmp;
+    })
+    rows.push(tmp);
     return rows;
   })
   return (
-    <Grid container spacing={1}>
-      <BottomToolbarRow row={rows} />
-    </Grid>
+    <BottomToolbarRow row={rows} />
   );
 };
 

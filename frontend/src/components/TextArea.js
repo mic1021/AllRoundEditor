@@ -9,7 +9,7 @@ import BottomToolbarBox from './buttonGridComponents/BottomToolbarBox';
 import EditableField from './mathFieldComponents/EditableField';
 import { useDispatch } from 'react-redux';
 import { SUBMIT } from '../slices/EquationSlice';
-import { Box} from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function TextArea(props){
@@ -22,8 +22,9 @@ function TextArea(props){
     }
 
     return(
+        <>
         <Accordion>
-            <AccordionSummary style={{ flexDirection: "column" }} expandIcon={<ExpandMoreIcon />}>
+            <AccordionSummary>
                 <Box bgcolor="#81c147" width="100%" margin="0px 30px 0px 30px" padding="10px 10px 10px 10px"
                     onClick={(event) => event.stopPropagation()}
                     onFocus={(event) => event.stopPropagation()}>
@@ -43,10 +44,15 @@ function TextArea(props){
                 >
                 </FormControlLabel>
             </AccordionSummary>
+        </Accordion>
+        <Accordion>
+            <AccordionSummary style={{ flexDirection: "column" }} expandIcon={<ExpandMoreIcon />}>
+            </AccordionSummary>
             <AccordionDetails>
                 <BottomToolbarBox></BottomToolbarBox>
             </AccordionDetails>
         </Accordion>
+        </> 
     )
 }
 

@@ -37,20 +37,68 @@
   }
 }
 
-.mq-root-block {
+.mq-editable-field .mq-root-block {
   vertical-align: super !important;
 }
 
 .mq-editable-field {
   border: unset !important;
-  box-shadow: none !important;
+  box-shadow: unset !important;
   font-size: 30px !important;
   width: 100% !important;
 }
 
-.MuiButtonBase-root.MuiAccordionSummary-root {
-  padding: 0px 0px 0px 0px !important;
-  align-items: unset !important;
+.MuiAccordionSummary-root {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.MuiAccordionSummary-content {
+  margin: 0 !important;
+}
+
+.MuiAccordionSummary-expandIcon {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  padding-top: 0 !important;
+}
+
+.MuiAccordionSummary-expandIcon.Mui-expanded {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  margin-bottom: 12px !important;
+}
+
+.MuiAccordion-root.Mui-expanded {
+  margin: 0 0 0 0 !important;
+}
+
+.MuiAccordionSummary-root.Mui-expanded {
+  min-height: unset !important;
+}
+
+.MuiAccordionDetails-root {
+  padding: unset !important;
+}
+
+.MuiGrid-spacing-xs-1 {
+  width: 100% !important;
+  margin: unset !important;
+}
+
+.MuiTab-root {
+  width: 16.7% !important;
+  max-width: unset !important;
+  min-width: unset !important;
+}
+
+.MuiList-padding {
+  padding: 0 !important;
+}
+
+.MuiDialogContent-root .mq-math-mode .mq-binary-operator {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /*.AppBar{

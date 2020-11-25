@@ -6,7 +6,7 @@ app.use(cors());
 // const express = require('express');
 // const app = express();
 
-const { favEquations, submitEquation } = require('./handlers/equations');
+const { favEquations, submitEquation, saveEquations, savedEquations } = require('./handlers/equations');
 const { signup, login } = require('./handlers/users');
 const FBAuth = require('./utils/fbAuth');
 
@@ -15,6 +15,8 @@ exports.api = functions.region('asia-northeast3').https.onRequest(app); //defaul
 // Equation Routes
 app.get('/favEquations', FBAuth, favEquations);
 app.post('/submitEquation', FBAuth, submitEquation);
+app.post('/saveEquations', FBAuth, saveEquations);
+app.get('/savedEquations', FBAuth, savedEquations);
 
 // User Routes
 app.post('/signup', signup);
