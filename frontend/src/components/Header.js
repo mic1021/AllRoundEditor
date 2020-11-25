@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { AppBar, Toolbar } from '@material-ui/core';
+import { AppBar, Button, Toolbar } from '@material-ui/core';
 import jwtDecode from 'jwt-decode';
-import { selectLoggedIn } from '../slices/EquationSlice';
-import { useSelector } from 'react-redux';
+import { selectLoggedIn, SEND } from '../slices/EquationSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import SavedEquations from './headerComponents/SavedEquations';
+import SaveEquations from './headerComponents/SaveEquations';
 // import imgA from '../../public/logo.png';
 
 // import {useAuthState} from 'react-firebase-hooks/auth';
@@ -14,6 +17,8 @@ export default function Header() {
     const [token, setToken] = useState('');
     const [authenticated, setAuthenticated] = useState(false);
     const loggedIn = useSelector(selectLoggedIn);
+    const dispatch = useDispatch();
+    let history = useHistory();
 
     const isExpired = (token) => token.exp * 1000 < Date.now()
 
@@ -31,11 +36,20 @@ export default function Header() {
                 } else setAuthenticated(false);
             }
     }, [loggedIn]);
+
+    const handleClick = (event) => {
+        dispatch(SEND());
+        history.push("/");
+    }
+
     return (
         <AppBar position="sticky">
             <Toolbar>
-                {/* <center><img src = {imgA} style={{alignSelf:"center",}} alt=""/></center> */}
                 {loggedIn ? <SignOut /> : <SignIn />}
+                <SavedEquations></SavedEquations>
+                <SaveEquations></SaveEquations>
+                <Button onClick={handleClick}>Submit</Button>
+                {/* <center><img src = {imgA} style={{alignSelf:"center",}} alt=""/></center> */}
             </Toolbar>
         </AppBar>
     )
