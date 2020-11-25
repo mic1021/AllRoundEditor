@@ -2,6 +2,7 @@ import React from 'react';
 import Demo from './components/Demo';
 import AllRoundEditor from './AllRoundEditor';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import './App.css';
 
 function App() {
   return (
