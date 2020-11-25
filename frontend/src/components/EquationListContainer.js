@@ -23,7 +23,6 @@ export default function EquationListContainer(props) {
             >
                 <BottomNavigationAction label="heh" value="yey" icon={<SaveIcon />}></BottomNavigationAction>
             </BottomNavigation> */}
-            <SavedEquations></SavedEquations>
         </>
     )
 }

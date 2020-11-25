@@ -7,23 +7,27 @@ export const selectCursor = state => state.equations.cursor
 export const selectShowDialogue = state => state.equations.showDialogue
 export const selectMathCmd = state => state.equations.mathCmd
 export const selectLoggedIn = state => state.equations.loggedIn
+export const selectSubmitted = state => state.equations.submitted
+
+const initialState = {
+    latex: "",
+    equations: [
+        'x + 3 = 1',
+        'x + 2 = 1',
+        'x + 1 = 1',
+    ],
+    checked: [],
+    edit: null,
+    cursor: 0,
+    showDialogue: false,
+    latexCmd: '',
+    loggedIn: false,
+    submitted: [],
+}
 
 export const EquationSlice = createSlice({
     name: 'equations',
-    initialState: {
-        latex: "",
-        equations: [
-            "x + 3 = 3",
-            "x + 1 = 2",
-            "x + 5 = 3"
-        ],
-        checked: [],
-        edit: null,
-        cursor: 0,
-        showDialogue: false,
-        latexCmd: '',
-        loggedIn: false
-    },
+    initialState,
     reducers: {
         INITCHECK: state => {
             state.checked = [];
@@ -42,6 +46,7 @@ export const EquationSlice = createSlice({
             if (state.edit === null) {
                 state.equations.push(state.latex);
                 state.checked.push(false);
+                console.log(state.latex);
             } else {
                 state.equations[state.edit] = state.latex;
             }
@@ -74,11 +79,15 @@ export const EquationSlice = createSlice({
         },
         MATHCMD: (state,action) => {
             state.mathCmd = action.payload;
+        },
+        SEND: state => {
+            state.submitted = [...state.equations];
+            state = []
         }
     }
 })
 
-export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE, CURSOR, SAVE, toggleDialogue, LOGIN, MATHCMD } = EquationSlice.actions
+export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE, CURSOR, SAVE, toggleDialogue, LOGIN, MATHCMD, SEND } = EquationSlice.actions
 
 export default EquationSlice.reducer
 

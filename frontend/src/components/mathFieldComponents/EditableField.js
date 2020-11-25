@@ -58,7 +58,7 @@ function EditableField(props) {
                     deleteCnt = 0;
                     let currentLatex=mathField.latex();
                     let idx = currentLatex.indexOf(placeHolder);
-                    if(idx!=-1) currentLatex = currentLatex.substr(0,idx)+currentLatex.substr(idx+placeHolder.length);
+                    if(idx!==-1) currentLatex = currentLatex.substr(0,idx)+currentLatex.substr(idx+placeHolder.length);
                     dispatch(CURSOR(cur));
                     dispatch(TYPE(currentLatex));
                 }
@@ -83,7 +83,7 @@ function EditableField(props) {
     return (
         <div ref={editableField}>
             <EditableMathField
-                latex={latex==""?placeHolder:latex}
+                latex={latex===""?placeHolder:latex}
                 onChange={handleChange}
                 onClick={updateCursorPosition}
                 onKeyDown={handleKeyDown}

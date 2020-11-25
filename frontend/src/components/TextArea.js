@@ -9,7 +9,7 @@ import BottomToolbarBox from './buttonGridComponents/BottomToolbarBox';
 import EditableField from './mathFieldComponents/EditableField';
 import { useDispatch } from 'react-redux';
 import { SUBMIT } from '../slices/EquationSlice';
-import { Box} from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 function TextArea(props){
