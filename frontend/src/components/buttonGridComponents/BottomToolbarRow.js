@@ -6,7 +6,7 @@ import { selectCursor, selectLatex, TYPE } from '../../slices/EquationSlice';
 
 const styles = {
   root:{
-    background: 'skyblue'
+    background: '#E2E2E2'
     ,color:'black'
   },
   button:{
