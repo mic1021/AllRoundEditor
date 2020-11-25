@@ -1,17 +1,16 @@
 import React from 'react';
-import Header from './components/Header';
-import EquationListContainer from './components/EquationListContainer';
-import TextArea from './components/TextArea';
-
-import './App.css';
+import Demo from './components/Demo';
+import AllRoundEditor from './AllRoundEditor';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
   return (
-    <>
-      <Header></Header>
-      <EquationListContainer></EquationListContainer>
-      <TextArea></TextArea>
-    </>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Demo}></Route>
+        <Route exact path="/AllRoundEditor" component={AllRoundEditor}></Route>
+      </Switch>
+    </Router>
   );
 }
 
