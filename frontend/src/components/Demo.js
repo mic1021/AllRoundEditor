@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {ContentState, convertFromHTML, convertToRaw, Editor, EditorState} from 'draft-js';
-import 'draft-js/dist/Draft.css';
+//import 'draft-js/dist/Draft.css';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { selectSubmitted } from '../slices/EquationSlice';
@@ -17,7 +17,7 @@ import {StaticMathField} from 'react-mathquill';
 // });
 
 export default function Demo() {
-    const state = ContentState.createFromBlockArray(convertFromHTML('<StaticMathField>//sqrt</StaticMathField>'))
+    //const state = ContentState.createFromBlockArray(convertFromHTML('<StaticMathField>//sqrt</StaticMathField>'))
     // const [editorState, setEditorState] = useState(
     //     () => EditorState.createWithContent(state)
     // );
