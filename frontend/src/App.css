@@ -51,10 +51,14 @@
 .MuiAccordionSummary-root {
   margin: 0 !important;
   padding: 0 !important;
+  
 }
 
 .MuiAccordionSummary-content {
-  margin: 0 !important;
+  /*margin: 0 !important;*/
+  min-width: 988px !important;
+  max-width: 1010px !important;
+  margin : 0 auto !important;
 }
 
 .MuiAccordionSummary-expandIcon {
@@ -70,7 +74,18 @@
 }
 
 .MuiAccordion-root.Mui-expanded {
-  margin: 0 0 0 0 !important;
+  /*margin: 0 0 0 0 !important;*/
+  padding: 0 10px !important;
+  min-width: 988px !important;
+  max-width: 1010px !important;
+  margin : 0 auto !important;
+}
+.MuiAccordion-root{
+  /*margin: 0 0 0 0 !important;*/
+  padding: 0 10px !important;
+  min-width: 988px !important;
+  max-width: 1010px !important;
+  margin : 0 auto !important;
 }
 
 .MuiAccordionSummary-root.Mui-expanded {
@@ -106,9 +121,9 @@
 }*/ 
 
 .MuiList-root {
-  padding: 0 10px;
-  min-width: 988px;
-  max-width: 1010px;
+  padding: 0 10px !important;
+  min-width: 988px !important;
+  max-width: 1010px !important;
   margin : 0 auto !important;
   border-width: 10px;
   border-color: #283428;
@@ -134,7 +149,7 @@
 
 .MuiAppBar-colorPrimary {
   color: #fff;
-  background-color: #46a853 !important;
+  background-color: #81ccaf !important;
 }
 
 .MuiAccordionSummary-content.Mui-expanded {
