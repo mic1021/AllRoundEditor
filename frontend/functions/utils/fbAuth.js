@@ -2,7 +2,7 @@ const { db, admin } = require('./admin');
 
 module.exports = (req, res, next) => { // next is function that follows
     let idToken;
-    if(req.headers.authorization && req.headers.authorization.startWith('Bearer ')) { // Bearer - good convention - your token has to start with 'Bearer '
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) { // Bearer - good convention - your token has to start with 'Bearer '
         idToken = req.headers.authorization.split('Bearer ')[1];
     } else {
         console.error('No token found');

@@ -63,11 +63,10 @@ exports.savedEquations = (req, res) => {
         .get()
         .then(data => {
             let equations = [];
-            data.forEach(doc => {
-                equations.push({
-                    ...doc
-                })
+            data.forEach((doc) => {
+                equations.push(doc.data())
             })
+            return res.json(equations)
         })
         .catch(err => console.error(err));
 }
