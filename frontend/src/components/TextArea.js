@@ -12,6 +12,9 @@ import { SUBMIT } from '../slices/EquationSlice';
 import Box from '@material-ui/core/Box';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import SaveIcon from "@material-ui/icons/Save";
+import SendIcon from '@material-ui/icons/Send';
+
 function TextArea(props){
     const dispatch = useDispatch();
 
@@ -25,20 +28,24 @@ function TextArea(props){
         <>
         <Accordion>
             <AccordionSummary>
-                <Box bgcolor="#81c147" width="100%" margin="0px 30px 0px 30px" padding="10px 10px 10px 10px"
-                    onClick={(event) => event.stopPropagation()}
-                    onFocus={(event) => event.stopPropagation()}>
-                    <Box bgcolor="white" padding="10px 0px 0px 0px">
-                        <EditableField></EditableField>
-                    </Box>
+
+                <Box bgcolor="white" width="100%" margin="20px 20px 20px 40px" padding="10px 10px 10px 10px"
+ //                   onClick={(event) => event.stopPropagation()}
+ //                   onFocus={(event) => event.stopPropagation()}>
+                      border = {2}
+                      borderColor="darkgreen"
+                      borderRadius={10}
+                    >
+                    <EditableField></EditableField>
+                   
                 </Box>
                 <FormControlLabel
                     aria-label="Acknowledge"
                     onClick={(event) => event.stopPropagation()}
                     onFocus={(event) => event.stopPropagation()}
                     control={
-                        <IconButton onClick={handleEnterPress("onClick")} onKeyPress={handleEnterPress}>
-                            <PublishIcon></PublishIcon>
+                    <IconButton onClick={handleEnterPress("onClick")} onKeyPress={handleEnterPress}>
+                        <SendIcon style={{ fontSize: 40, color: "black", padding: 0}}></SendIcon>
                         </IconButton>
                     }
                 >

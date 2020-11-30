@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import SavedEquations from './headerComponents/SavedEquations';
 import SaveEquations from './headerComponents/SaveEquations';
-// import imgA from '../../public/logo.png';
-
+//import imgA from '../../public/logo.png';
+import imgA from '../logo.png';
 // import {useAuthState} from 'react-firebase-hooks/auth';
 
 import SignOut from './headerComponents/SignOut';
@@ -45,11 +45,15 @@ export default function Header() {
     return (
         <AppBar position="sticky">
             <Toolbar>
-                {loggedIn ? <SignOut /> : <SignIn />}
                 <SavedEquations></SavedEquations>
                 <SaveEquations></SaveEquations>
                 <Button onClick={handleClick}>Submit</Button>
-                {/* <center><img src = {imgA} style={{alignSelf:"center",}} alt=""/></center> */}
+                {/*<center>
+                    <img src = {imgA} style={{alignSelf:"center",}} alt=""/>
+                </center>*/}
+                <div style={{textAlign:"right", width:"100%"}}>
+                    {loggedIn ? <SignOut /> : <SignIn />}
+                </div>
             </Toolbar>
         </AppBar>
     )
