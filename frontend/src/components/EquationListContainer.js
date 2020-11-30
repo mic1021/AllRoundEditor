@@ -3,7 +3,6 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import SaveIcon from '@material-ui/icons/Save';
 import EquationList from './textAreaComponents/EquationList';
-import SavedEquations from './textAreaComponents/SavedEquations';
 import imgA from '../logo.png';
 // import { BottomNav, blah, blah } from '@material-ui/core/'; ==> problem because its going to import the whole core pkg rather than necessary ones
 
