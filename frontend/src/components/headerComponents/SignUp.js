@@ -7,6 +7,12 @@ import axios from 'axios';
 import { LOGIN } from '../../slices/EquationSlice';
 import { useDispatch } from 'react-redux';
 
+const config = {
+    headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+}
+
 export default function SignUp(props) {
     const [open, setOpen] = useState(false);
     const [email, setEmail] = useState('');
@@ -33,16 +39,19 @@ export default function SignUp(props) {
         else if(event.target.name==='handle') setHandle(event.target.value);
     }
     const handleSubmit = (event) => {
+        console.log(email, password, confirmPassword, handle);
         const userData = {
             email,
             password,
             confirmPassword,
             handle
         }
-        axios.post('http://localhost:5001/allroundeditor-dcc51/asia-northeast3/api/signup', userData)
+        axios.post('http://localhost:5001/allroundeditor-261bc/asia-northeast3/api/signup', userData)
             .then(res=>{
                 console.log(res.data);
-                localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
+                const FBIdToken = `Bearer ${res.data.token}`;
+                localStorage.setItem('FBIdToken', FBIdToken);
+                axios.defaults.headers.common['Authorization'] = FBIdToken;
                 dispatch(LOGIN());
             })
             .catch(err => {
