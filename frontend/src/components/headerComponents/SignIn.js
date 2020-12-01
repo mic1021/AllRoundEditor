@@ -32,10 +32,12 @@ export default function SignIn() {
       email,
       password
     }
-    axios.post('http://localhost:5001/allroundeditor-dcc51/asia-northeast3/api/login', userData)
+    axios.post('http://localhost:5001/allroundeditor-261bc/asia-northeast3/api/login', userData)
       .then(res => {
         console.log(res.data);
-        localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
+        const FBIdToken = `Bearer ${res.data.token}`;
+        localStorage.setItem('FBIdToken', FBIdToken);
+        axios.defaults.headers.common['Authorization'] = FBIdToken;
         dispatch(LOGIN());
       })
       .catch(err => {

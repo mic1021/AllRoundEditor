@@ -5,17 +5,19 @@ import Modal from '@material-ui/core/Modal';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectChecked, selectEquation } from '../../slices/EquationSlice';
-import { Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem, ListItemSecondaryAction, TextField } from '@material-ui/core';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Grid, List, ListItem, ListItemSecondaryAction, TextField, Typography } from '@material-ui/core';
 import { StaticMathField } from 'react-mathquill';
+import EquationToSave from './EquationToSave';
 
 export default function SaveEquations(props) {
     const [openError, setOpenError] = useState(false);
     const [open, setOpen] = useState(false);
+    const [disabled, setDisabled] = useState([]);
     // const [order, setOrder] = useState([]);
     const checked = useSelector(selectChecked);
     const equations = useSelector(selectEquation);
     const [categories, setCategories] = useState([]);
-    let rows = [];
+    const [rows, setRows] = useState([]);
     // async function processArray(array) {
     //     array.forEach(item => {
     //         await (() => {
@@ -23,37 +25,44 @@ export default function SaveEquations(props) {
     //         })
     //     })
     // }
-    const handleChange = (index) => (event) => {
-        let newValue = event.target.value;
-        setCategories([...categories, categories.splice(index, 1, newValue)]);
+    const categorySet = (index, value) => {
+        setCategories([...categories.splice(index, 1, value)])
+        console.log(index, categories);
     }
+
     const handleClick = (event) => {
-        console.log(checked);
+        console.log('checked', checked);
         if (checked.length < 1) {
             setOpenError(true)
         } else {
+            let tempRow = [];
+            setCategories([]);
+            setDisabled([]);
+            let newCategories = [];
+            let categoryIndex = 0;
             checked.forEach((item, index) => {
                 // let newOrder = [...order];
                 // newOrder.push(false);
                 // setOrder(newOrder);
-                let newCategories = [...categories];
                 newCategories.push('');
-                setCategories(newCategories);
+                console.log('nc', newCategories);
+                // console.log(categories);
                 if (item === true) {
-                    rows.push(
-                        <ListItem>
-                            <StaticMathField>{props.equation}</StaticMathField>
-                            <ListItemSecondaryAction>
-                                <TextField
-                                    value={categories[index]}
-                                    onChange={handleChange(index)}
-                                ></TextField>
-                            </ListItemSecondaryAction>
-                        </ListItem>
+                    tempRow.push(
+                        //index equation category and changeCategory
+                        <EquationToSave
+                            index={categoryIndex}
+                            equation={equations[index]}
+                            category={categories[categoryIndex]}
+                            categorySet={categorySet}
+                        />
                     )
+                    categoryIndex = categoryIndex + 1;
                     // <Categorize order={} equation={equations[index]}></Categorize>
                 }
             });
+            setRows(tempRow);
+            setCategories(newCategories);
             // save checked equations
             // init checked
             setOpen(true);
@@ -66,13 +75,17 @@ export default function SaveEquations(props) {
         setOpen(false);
     }
     const handleSave = (event) => {
+        console.log(categories);
+        let categoryIndex = 0;
         checked.forEach((item, index) => {
             if(item === true) {
                 let newEntry = {
-                    category: categories[index],
+                    category: categories[categoryIndex],
                     equation: equations[index],
                 }
-                axios.post('http://localhost:5001/allroundeditor-dcc51/asia-northeast3/api/saveEquations', newEntry)
+                categoryIndex = categoryIndex + 1;
+                console.log(newEntry);
+                axios.post('http://localhost:5001/allroundeditor-261bc/asia-northeast3/api/saveEquations', newEntry)
                     .then(res => {
                         console.log(res.data)
                     })
@@ -81,6 +94,7 @@ export default function SaveEquations(props) {
                     });
             }
         })
+        handleClose();
     }
     const errorMessage = (
         <div>
