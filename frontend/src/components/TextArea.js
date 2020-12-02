@@ -30,8 +30,8 @@ function TextArea(props){
             <AccordionSummary>
 
                 <Box bgcolor="white" width="100%" margin="30px 30px 30px 0px" padding="10px 10px 10px 10px"
- //                   onClick={(event) => event.stopPropagation()}
- //                   onFocus={(event) => event.stopPropagation()}>
+                    onClick={(event) => event.stopPropagation()}
+                    onFocus={(event) => event.stopPropagation()}
                     border = {2}
                     border = "groove"
                     borderColor="#81ccaf"
