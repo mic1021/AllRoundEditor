@@ -45,9 +45,11 @@ export default function Header() {
     return (
         <AppBar position="sticky">
             <Toolbar>
-                <Button variant="outlined" size ='small'>
-                    <SavedEquations></SavedEquations>
-                </Button>
+                <div style={{padding:'0 10px 0 0'}}>
+                    <Button variant="outlined" size ='small'>
+                        <SavedEquations></SavedEquations>
+                    </Button>
+                </div>
                 <ButtonGroup>
                     <SaveEquations></SaveEquations>
                     <Button onClick={handleClick}>Submit</Button>

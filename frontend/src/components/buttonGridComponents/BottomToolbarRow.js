@@ -33,7 +33,7 @@ function TabPanel(props) {
   const getItemJSX = (items) => {
     return items.map(
       (item,index) => {
-        return <Grid key={index} item className = {classes.root} xs={3} sm={2} md={2} lg={1} xl={1}>
+        return <Grid key={index} item className = {classes.root} xs={3} sm={2} md={2} lg={2} xl={2}>
           <Button className={classes.button} 
             onClick={buttonClickEvent(item,currentCursorPosition,currentLatex)} fullWidth>
             {item}
