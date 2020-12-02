@@ -107,6 +107,12 @@
   min-width: unset !important;
 }
 
+.MuiToolbar-root{
+  margin : 0 120px !important;
+  /*min-width: 988px !important;
+  max-width: 1010px !important;*/
+}
+
 .MuiList-padding {
   padding: 0 !important;
 }
@@ -149,7 +155,9 @@
 
 .MuiAppBar-colorPrimary {
   color: #fff;
-  background-color: #81ccaf !important;
+  /*background-color: #81ccaf !important;*/
+  background-color: #1ac986 !important;
+  opacity: 0.6;
 }
 
 .MuiAccordionSummary-content.Mui-expanded {
