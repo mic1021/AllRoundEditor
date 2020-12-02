@@ -11,7 +11,7 @@ export default function favEquations() { // frequentlyUsed(history) & Saved
     const loggedIn = useSelector(selectLoggedIn);
     useEffect(() => {
       if (loggedIn) {
-        axios.get('http://localhost:5001/allroundeditor-dcc51/asia-northeast3/api/favEquation')
+        axios.get('https://asia-northeast3-allroundeditor-261bc.cloudfunctions.net/api/favEquation')
             .then(res => {
                 console.log("Request Success in log")
                 console.log(res.data);

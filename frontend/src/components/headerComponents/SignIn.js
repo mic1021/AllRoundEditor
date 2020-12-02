@@ -32,7 +32,7 @@ export default function SignIn() {
       email,
       password
     }
-    axios.post('http://localhost:5001/allroundeditor-261bc/asia-northeast3/api/login', userData)
+    axios.post('https://asia-northeast3-allroundeditor-261bc.cloudfunctions.net/api/login', userData)
       .then(res => {
         console.log(res.data);
         const FBIdToken = `Bearer ${res.data.token}`;
