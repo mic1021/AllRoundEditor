@@ -48,6 +48,9 @@
   width: 100% !important;
 }
 
+.MuiBox-root-5 {
+  padding: 15px 5px 5px 5px !important;
+}
 .MuiAccordionSummary-root {
   margin: 0 !important;
   padding: 0 !important;
