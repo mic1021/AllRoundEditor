@@ -131,15 +131,15 @@
   min-width: 988px !important;
   max-width: 1010px !important;
   margin : 0 auto !important;
-  border-width: 10px;
-  border-color: #342b28;
-  border: solid;
+ /* border-width: 2px !important; */
+  border: double !important;
+
+  border-color: #81ccaf !important;
+  border-right: 10px !important;
+  border-left: 10px !important;
+
   /*background: lightblue;
   background-clip: content-box;*/
-  
-
-  /*width: calc(100% - 20px);
-  /*position: absolute;*/
 }
 
 .MuiListItem-container {
