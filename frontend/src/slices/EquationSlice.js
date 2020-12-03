@@ -12,7 +12,6 @@ export const selectSubmitted = state => state.equations.submitted
 const initialState = {
     latex: "",
     equations: [
-        ""
     ],
     checked: [],
     edit: null,
