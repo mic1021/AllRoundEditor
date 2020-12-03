@@ -12,9 +12,7 @@ export const selectSubmitted = state => state.equations.submitted
 const initialState = {
     latex: "",
     equations: [
-        'x + 3 = 1',
-        'x + 2 = 1',
-        'x + 1 = 1',
+        ""
     ],
     checked: [],
     edit: null,
