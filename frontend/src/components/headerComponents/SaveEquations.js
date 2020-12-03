@@ -97,7 +97,7 @@ export default function SaveEquations(props) {
         handleClose();
     }
     const errorMessage = (
-        <div>
+        <div style={{backgroundColor:"white"}}>
             <h2>Error!</h2>
             <p>Please select equations you want to save before clicking save</p>
         </div>
