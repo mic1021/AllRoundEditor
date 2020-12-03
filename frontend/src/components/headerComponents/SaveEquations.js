@@ -85,7 +85,7 @@ export default function SaveEquations(props) {
                 }
                 categoryIndex = categoryIndex + 1;
                 console.log(newEntry);
-                axios.post('http://localhost:5001/allroundeditor-261bc/asia-northeast3/api/saveEquations', newEntry)
+                axios.post('https://asia-northeast3-allroundeditor-261bc.cloudfunctions.net/api/saveEquations', newEntry)
                     .then(res => {
                         console.log(res.data)
                     })
