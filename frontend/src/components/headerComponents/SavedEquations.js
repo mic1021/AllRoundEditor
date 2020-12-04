@@ -3,7 +3,10 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import ListItem from '@material-ui/core/ListItem';
 import axios from 'axios';
-import { DialogActions, DialogContent, DialogTitle, List } from '@material-ui/core';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import List from '@material-ui/core/List';
 import { StaticMathField } from 'react-mathquill';
 
 export default function SavedEquations(props) {
@@ -31,7 +34,7 @@ export default function SavedEquations(props) {
     const handleClose = (event) => {
         setOpen(false);
     }
-    
+
     const handleSelect = (event) => {
         setOpen(false);
     }
