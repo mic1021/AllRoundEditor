@@ -31,25 +31,10 @@ export default function SavedEquations(props) {
     const handleClose = (event) => {
         setOpen(false);
     }
-    const handleTogggle = (value) => (event) => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked]
-
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked)
-    }
+    
     const handleSelect = (event) => {
         setOpen(false);
     }
-
-    // let equations;
-    // bring saved equations
-    
 
     return (
         <>

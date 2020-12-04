@@ -69,14 +69,8 @@ export const EquationSlice = createSlice({
             state.latex = state.equations[action.payload];
         },
         DELETE: (state, action) => {
-            //ACTION.PAYLOAD IS INDEX VALUE
-            //DELETE EQUATION
             state.equations.splice(action.payload, 1);
             state.checked.splice(action.payload, 1);
-        },
-        SAVE: (state, action) => {
-            //ACTION.PAYLOAD IS AN ARRAY OF CHECKED LIST
-            //SAVE TO BACKEND
         },
         CURSOR: (state,action) => {
             state.cursor = action.payload;
@@ -98,7 +92,7 @@ export const EquationSlice = createSlice({
     }
 })
 
-export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE, CURSOR, SAVE, toggleDialogue, LOGIN, MATHCMD, SEND } = EquationSlice.actions
+export const { INITCHECK, TOGGLE, TYPE, SUBMIT, EDIT, DELETE, CURSOR, toggleDialogue, LOGIN, MATHCMD, SEND } = EquationSlice.actions
 
 export default EquationSlice.reducer
 

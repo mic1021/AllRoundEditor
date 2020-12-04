@@ -1,13 +1,12 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import {StaticMathField} from 'react-mathquill';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { TYPE } from '../../slices/EquationSlice';
 
-export default function FavEquations() { // frequentlyUsed(history) & Saved
+export default function FavEquations() {
     const [success, setSuccess] = useState(false);
     const [equations, setEquations] = useState([]);
     const dispatch = useDispatch();
