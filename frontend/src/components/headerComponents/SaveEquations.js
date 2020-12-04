@@ -38,14 +38,12 @@ export default function SaveEquations(props) {
                 open={openError}
                 handleClose={handleCloseError}
             />
-            {
-            open ? 
+            {open &&
                 <SaveEquationDialog
                     open={open}
                     handleClose={handleClose}
                     checked={checked}
                 />
-                : null
             }
         </>
     )

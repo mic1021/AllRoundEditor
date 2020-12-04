@@ -8,37 +8,36 @@ import { useSelector, useDispatch } from 'react-redux';
 import { TYPE } from '../../slices/EquationSlice';
 
 export default function FavEquations() { // frequentlyUsed(history) & Saved
-    const [buttons, setButtons] = useState();
-    const [equations, setEquations] = useState();
+    const [success, setSuccess] = useState(false);
+    const [equations, setEquations] = useState([]);
     const dispatch = useDispatch();
     useEffect(() => {
-      axios.get('http://localhost:5001/allroundeditor-261bc/asia-northeast3/api/favEquations')
-          .then(res => {
-            let tempEquations = []
-            console.log("Request Success in log")
-            console.log(res.data.equations);
-            setEquations(res.data.equations);
-            res.data.equations.forEach((equation, index) => {
-              tempEquations.push(
-                <Button key={index} onClick={handleClick(index)}>
-                  <StaticMathField>{equation}</StaticMathField>
-                </Button>
-              );
-            })
-            setButtons(tempEquations);
-          })
-          .catch(err => console.error(err));
+      const createButtons = async() => {
+        try {
+          const res = await axios.get(`${process.env.REACT_APP_API}/favEquations`);
+
+          setEquations(res.data.equations);
+          setSuccess(true);
+        } catch(err) {
+          console.error(err);
+        }
+      }
+      createButtons();
     }, []);
   
     const handleClick = (index) => (event) => {
       console.log(equations[index]);
       dispatch(TYPE(equations[index]));
-      // dispatch(replace(e.target.textContent))
-      // replace current editableField content with content of e.target.textcontent
     }
     return (
       <ButtonGroup>
-        {equations ? buttons : null}
+        {success && (equations.map((item, index) => {
+          return (
+            <Button key={index} onClick={handleClick(index)}>
+              <StaticMathField>{item}</StaticMathField>
+            </Button>
+          )
+        }))}
       </ButtonGroup>
     )
 }

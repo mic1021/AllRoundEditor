@@ -54,7 +54,7 @@ export const EquationSlice = createSlice({
             let equation = {
                 equation: state.latex
             }
-            axios.post('http://localhost:5001/allroundeditor-261bc/asia-northeast3/api/submitEquation', equation)
+            axios.post(`${process.env.REACT_APP_API}/submitEquation`, equation)
                 .then(res => {
                     console.log(res.data);
                 })
