@@ -13,7 +13,7 @@ export default function SavedEquations(props) {
     const handleClick = (event) => {
         setOpen(true);
         let listA = [];
-        axios.get('https://asia-northeast3-allroundeditor-261bc.cloudfunctions.net/api/savedEquations')
+        axios.get(`${process.env.REACT_APP_API}/savedEquations`)
             .then(res => {
                 res.data.forEach(item => {
                     listA.push(

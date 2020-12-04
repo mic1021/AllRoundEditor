@@ -38,7 +38,7 @@ export default function FavEquations() { // frequentlyUsed(history) & Saved
     }
     return (
       <ButtonGroup>
-        {equations ? buttons : <></>}
+        {equations ? buttons : null}
       </ButtonGroup>
     )
 }
