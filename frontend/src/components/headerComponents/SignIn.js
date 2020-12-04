@@ -32,7 +32,7 @@ export default function SignIn() {
       email,
       password
     }
-    axios.post('https://asia-northeast3-allroundeditor-261bc.cloudfunctions.net/api/login', userData)
+    axios.post(`${process.env.REACT_APP_API}/login`, userData)
       .then(res => {
         console.log(res.data);
         const FBIdToken = `Bearer ${res.data.token}`;
