@@ -46,7 +46,7 @@ export default function SignUp(props) {
             confirmPassword,
             handle
         }
-        axios.post('http://localhost:5001/allroundeditor-261bc/asia-northeast3/api/signup', userData)
+        axios.post('https://asia-northeast3-allroundeditor-261bc.cloudfunctions.net/api/signup', userData)
             .then(res=>{
                 console.log(res.data);
                 const FBIdToken = `Bearer ${res.data.token}`;

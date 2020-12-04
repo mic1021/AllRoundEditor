@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export const selectEquation = state => state.equations.equations
 export const selectLatex = state => state.equations.latex
@@ -50,6 +51,16 @@ export const EquationSlice = createSlice({
             } else {
                 state.equations[state.edit] = state.latex;
             }
+            let equation = {
+                equation: state.latex
+            }
+            axios.post('http://localhost:5001/allroundeditor-261bc/asia-northeast3/api/submitEquation', equation)
+                .then(res => {
+                    console.log(res.data);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
             state.latex = "";
             state.edit = null;
         },
