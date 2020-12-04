@@ -25,39 +25,12 @@ export default function SaveEquations(props) {
     const handleClose = (event) => {
         setOpen(false);
     }
-    const handleSave = (event) => {
-        console.log(categories);
-        let categoryIndex = 0;
-        checked.forEach((item, index) => {
-            if(item === true) {
-                let newEntry = {
-                    category: categories[categoryIndex],
-                    equation: equations[index],
-                }
-                categoryIndex = categoryIndex + 1;
-                console.log(newEntry);
-                axios.post('https://asia-northeast3-allroundeditor-261bc.cloudfunctions.net/api/saveEquations', newEntry)
-                    .then(res => {
-                        console.log(res.data)
-                    })
-                    .catch(err => {
-                        console.error(err);
-                    });
-            }
-        })
-        handleClose();
-    }
-    const errorMessage = (
-        <div style={{backgroundColor:"white"}}>
-            <h2>Error!</h2>
-            <p>Please select equations you want to save before clicking save</p>
-        </div>
-    )
+
     return (
         <>
             <Button 
                 variant="contained"
-                //color=""
+                color="primary"
                 startIcon={<SaveIcon/>}
                 onClick={handleClick}
             />
