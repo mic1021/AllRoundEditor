@@ -30,7 +30,7 @@ export default function SaveEquations(props) {
         <>
             <Button 
                 variant="contained"
-                //color=""
+                color="primary"
                 startIcon={<SaveIcon/>}
                 onClick={handleClick}
             />
