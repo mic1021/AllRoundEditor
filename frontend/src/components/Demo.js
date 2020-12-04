@@ -16,16 +16,10 @@ export default function Demo() {
         rows.push(<StaticMathField>{element}</StaticMathField>)
     });
 
-    const handleClick = () => {
-        // let content = editorState.getCurrentContent();
-        // console.log(convertToRaw(content).blocks[0].text);
-    }
-
     return (
         <>
             {rows}
             <Button variant="contained" color="primary" component={Link} to="AllRoundEditor">AllRoundEditor</Button>
-            <Button variant="contained" color="primary" onClick={handleClick}>Check</Button>
         </>
     )
 }

@@ -53,7 +53,7 @@ export default function Header() {
                 </center>*/}
                 <div style={{textAlign:"right", width:"100%"}}>
                     <Button variant="outlined" size ='small'>
-                        {loggedIn ? <SignOut /> : <SignIn />}
+                        {authenticated ? <SignOut /> : <SignIn />}
                     </Button>
                 </div>
             </Toolbar>
