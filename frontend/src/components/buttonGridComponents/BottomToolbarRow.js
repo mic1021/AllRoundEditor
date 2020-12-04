@@ -1,5 +1,9 @@
 import React from 'react';
-import { Button , Grid , AppBar, Tab, Tabs} from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import AppBar from '@material-ui/core/AppBar';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCursor, selectLatex, TYPE } from '../../slices/EquationSlice';
 import PropTypes from 'prop-types';
@@ -33,7 +37,7 @@ function TabPanel(props) {
   const getItemJSX = (items) => {
     return items.map(
       (item,index) => {
-        return <Grid key={index} item className = {classes.root} xs={3} sm={2} md={2} lg={1} xl={1}>
+        return <Grid key={index} item className = {classes.root} xs={3} sm={2} md={2} lg={2} xl={2}>
           <Button className={classes.button} 
             onClick={buttonClickEvent(item,currentCursorPosition,currentLatex)} fullWidth>
             {item}

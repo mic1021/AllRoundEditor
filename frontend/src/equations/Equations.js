@@ -17,6 +17,10 @@ const latexEquations = [
     {name: 'Vector', equation: '\\vec{v}', text: '\\vector',fontSize: '300%',textSize: '100%',topPos: '80%'},
     {name: 'Parallel', equation: '\\parallel', text: '\\parallel',fontSize: '300%',textSize: '100%',topPos: '80%'},
     {name: 'Not parallel', equation: '\\nparallel', text: '\\not parallel',fontSize: '300%',textSize: '100%',topPos: '80%'},
+    {name: 'Left ceil', equation: '\\lceil', text: '\\left ceil',fontSize: '300%',textSize: '100%',topPos: '80%'},
+    {name: 'Right ceil', equation: '\\rceil', text: '\\right ceil',fontSize: '300%',textSize: '100%',topPos: '80%'},
+    {name: 'Left floor', equation: '\\lfloor', text: '\\left floor',fontSize: '300%',textSize: '100%',topPos: '80%'},
+    {name: 'Right floor', equation: '\\rfloor', text: '\\right floor',fontSize: '300%',textSize: '100%',topPos: '80%'},
 ],
 [
     //Arithmetic Symbols
@@ -25,6 +29,7 @@ const latexEquations = [
     {name: 'Plus-Minus', equation: '\\pm', text: '\\plus-minus',fontSize: '300%',textSize: '100%',topPos: '80%'},
     {name: 'Minus-Plus', equation: '\\mp', text: '\\minus-plus',fontSize: '300%',textSize: '100%',topPos: '80%'},
     {name: 'Divide', equation: '\\mid', text: '\\divide',fontSize: '300%',textSize: '100%',topPos: '80%'},
+    {name: 'Cdot', equation: '\\cdot', text: '\\cdot',fontSize: '300%',textSize: '100%',topPos: '80%'},
 ],
 [
     //Logic Symbols

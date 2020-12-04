@@ -13,8 +13,8 @@ const FBAuth = require('./utils/fbAuth');
 exports.api = functions.region('asia-northeast3').https.onRequest(app); //default region is us-central1
 
 // Equation Routes
-app.get('/favEquations', FBAuth, favEquations);
-app.post('/submitEquation', FBAuth, submitEquation);
+app.get('/favEquations', favEquations);
+app.post('/submitEquation', submitEquation);
 app.post('/saveEquations', FBAuth, saveEquations);
 app.get('/savedEquations', FBAuth, savedEquations);
 

@@ -1,43 +1,78 @@
 const { db } = require('../utils/admin');
 
 exports.favEquations = (req, res) => {
-    db.collection(`equations`)
+    db.collection('equations')
         .orderBy('frequency', 'desc')
         .limit(3)
         .get()
         .then(data => {
             let equations = [];
             data.forEach(doc => {
-                equations.push({
-                    docId: doc.id,
-                    ...doc.data(),
-                    // equation: doc.data().equation,
-                    // frequency: doc.data().frequency,
-                    // createdAt: doc.data(),
-                });
+                // equations.push({
+                //     equation: doc.id,
+                //     ...doc.data(),
+                //     // equation: doc.data().equation,
+                //     // frequency: doc.data().frequency,
+                //     // createdAt: doc.data(),
+                // });
+                equations.push(doc.id)
             })
 
-            return res.json(equations);
+            return res.json({equations});
         })
         .catch(err => console.error(err));
 }
 
 exports.submitEquation = (req, res) => {
-    const equation = {
-        equation: req.body.equation,
-        frequency: req.body.frequency,
-        // createdAt: admin.firestore.Timestamp.fromDate(new Date()), - firebase timestamp format
-        createdAt: new Date().toISOString(),
-    }
-
-    db.collection('hjkim0822').add(equation)
+    const equationRef = db.doc(`/equations/${req.body.equation}`);
+    let mode;
+    equationRef.get()
         .then(doc => {
-            res.json({message: `document ${doc.id} created successfully`});
+            if(doc.exists) {
+                mode = 0;
+                return equationRef.update({
+                    frequency: doc.data().frequency + 1
+                });
+            } else {
+                mode = 1;
+                const equation = {
+                    frequency: 1,
+                    // createdAt: admin.firestore.Timestamp.fromDate(new Date()), - firebase timestamp format
+                    createdAt: new Date().toISOString(),
+                }
+                return equationRef.set(equation);
+            }
+        })
+        .then(doc => {
+            if (mode === 1) {
+                res.json({message: `document ${doc.id} created successfully`});
+            } else {
+                res.json({message: `document ${doc.id} updated successfully`});
+            }
         })
         .catch(err => {
-            res.status(500).json({error: 'something went wrong'}); // 500 server side error
             console.error(err);
-        })
+        });
+    
+    // equationRef.update({
+    //     frequency: firebase.firestore.FieldValue.increment(1)
+    //     // frequency: 1
+    // })
+    // .then(res => {
+    //     console.log(res);
+    // })
+    // .catch(err => {
+    //     console.error(err);
+    //     console.log("HERE");
+    //     db.collection('equations').add(equation)
+    //         .then(doc => {
+    //             res.json({message: `document ${doc.id} created successfully`});
+    //         })
+    //         .catch(err => {
+    //             res.status(500).json({error: 'something went wrong'}); // 500 server side error
+    //             console.error(err);
+    //         });
+    // });
 }
 
 exports.saveEquations = (req, res) => {

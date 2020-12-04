@@ -48,6 +48,9 @@
   width: 100% !important;
 }
 
+.MuiBox-root-5 {
+  padding: 15px 5px 5px 5px !important;
+}
 .MuiAccordionSummary-root {
   margin: 0 !important;
   padding: 0 !important;
@@ -107,6 +110,12 @@
   min-width: unset !important;
 }
 
+.MuiToolbar-root{
+  margin : 0 120px !important;
+  /*min-width: 988px !important;
+  max-width: 1010px !important;*/
+}
+
 .MuiList-padding {
   padding: 0 !important;
 }
@@ -125,15 +134,15 @@
   min-width: 988px !important;
   max-width: 1010px !important;
   margin : 0 auto !important;
-  border-width: 10px;
-  border-color: #283428;
-  border: solid;
+ /* border-width: 2px !important; */
+  border: double !important;
+
+  border-color: #81ccaf !important;
+  border-right: 10px !important;
+  border-left: 10px !important;
+
   /*background: lightblue;
   background-clip: content-box;*/
-  
-
-  /*width: calc(100% - 20px);
-  /*position: absolute;*/
 }
 
 .MuiListItem-container {
@@ -149,7 +158,9 @@
 
 .MuiAppBar-colorPrimary {
   color: #fff;
-  background-color: #81ccaf !important;
+  /*background-color: #81ccaf !important;*/
+  background-color: #1ac986 !important;
+  opacity: 0.6;
 }
 
 .MuiAccordionSummary-content.Mui-expanded {

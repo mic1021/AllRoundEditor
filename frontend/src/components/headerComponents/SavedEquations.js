@@ -3,17 +3,19 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import ListItem from '@material-ui/core/ListItem';
 import axios from 'axios';
-import { DialogActions, DialogContent, DialogTitle, List } from '@material-ui/core';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import List from '@material-ui/core/List';
 import { StaticMathField } from 'react-mathquill';
 
 export default function SavedEquations(props) {
-    const [checked, setChecked] = useState([0])
     const [open, setOpen] = useState(false)
     const [equations, setEquations] = useState([]);
     const handleClick = (event) => {
         setOpen(true);
         let listA = [];
-        axios.get('https://asia-northeast3-allroundeditor-261bc.cloudfunctions.net/api/savedEquations')
+        axios.get(`${process.env.REACT_APP_API}/savedEquations`)
             .then(res => {
                 res.data.forEach(item => {
                     listA.push(
@@ -31,25 +33,10 @@ export default function SavedEquations(props) {
     const handleClose = (event) => {
         setOpen(false);
     }
-    const handleTogggle = (value) => (event) => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked]
 
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked)
-    }
     const handleSelect = (event) => {
         setOpen(false);
     }
-
-    // let equations;
-    // bring saved equations
-    
 
     return (
         <>

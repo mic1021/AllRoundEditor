@@ -11,6 +11,19 @@ import { StaticMathField } from 'react-mathquill';
 import { TOGGLE, EDIT, DELETE, selectChecked } from '../../slices/EquationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
+const theme = createMuiTheme({
+    overrides: {
+      MenuItem: {
+        root:{
+        width: 'fit-content'
+        }
+      }
+    }
+  });
+
 function EquationListRow(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -66,8 +79,12 @@ function EquationListRow(props) {
                     keepMounted
                     onClose={handleClose}
                 >
+                <ThemeProvider theme={theme}>
+                
                     <MenuItem onClick={handleClose}>EDIT</MenuItem>
                     <MenuItem onClick={handleClose}>DELETE</MenuItem>
+                                  
+                </ThemeProvider>
                 </Menu>
             </ListItemSecondaryAction>
         </ListItem>
