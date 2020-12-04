@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import jwtDecode from 'jwt-decode';
 import { selectLoggedIn, SEND } from '../slices/EquationSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,10 +41,21 @@ export default function Header() {
     return (
         <AppBar position="sticky">
             <Toolbar>
-                {authenticated ? <SignOut /> : <SignIn />}
-                <SavedEquations></SavedEquations>
-                <SaveEquations></SaveEquations>
-                <Button onClick={handleClick}>Submit</Button>
+                <Button variant="outlined" size ='small'>
+                    <SavedEquations></SavedEquations>
+                </Button>
+                <ButtonGroup>
+                    <SaveEquations></SaveEquations>
+                    <Button onClick={handleClick}>Submit</Button>
+                </ButtonGroup>
+                {/*<center>
+                    <img src = {imgA} style={{alignSelf:"center",}} alt=""/>
+                </center>*/}
+                <div style={{textAlign:"right", width:"100%"}}>
+                    <Button variant="outlined" size ='small'>
+                        {loggedIn ? <SignOut /> : <SignIn />}
+                    </Button>
+                </div>
             </Toolbar>
         </AppBar>
     )

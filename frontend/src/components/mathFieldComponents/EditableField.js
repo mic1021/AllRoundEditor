@@ -28,6 +28,7 @@ function EditableField(props) {
         if (mathCmd !== '' && mathCmd !== undefined) {
             dispatch(TYPE(latex.substr(0,cur)+mathCmd+latex.substr(cur)));
             dispatch(MATHCMD(''));
+            dispatch(CURSOR((latex.substr(0,cur)+mathCmd+latex.substr(cur)).length));
         }
     }, [showDialogue, mathCmd,latex,dispatch]);
 

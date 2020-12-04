@@ -10,7 +10,6 @@ import List from '@material-ui/core/List';
 import { StaticMathField } from 'react-mathquill';
 
 export default function SavedEquations(props) {
-    const [checked, setChecked] = useState([0])
     const [open, setOpen] = useState(false)
     const [equations, setEquations] = useState([]);
     const handleClick = (event) => {
