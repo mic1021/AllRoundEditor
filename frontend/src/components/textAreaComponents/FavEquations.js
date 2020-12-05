@@ -29,7 +29,8 @@ export default function FavEquations() {
       dispatch(TYPE(equations[index]));
     }
     return (
-      <ButtonGroup>
+      <center>
+        <ButtonGroup>
         {success && (equations.map((item, index) => {
           return (
             <Button key={index} onClick={handleClick(index)}>
@@ -37,7 +38,8 @@ export default function FavEquations() {
             </Button>
           )
         }))}
-      </ButtonGroup>
+        </ButtonGroup>
+      </center>
     )
 }
   
