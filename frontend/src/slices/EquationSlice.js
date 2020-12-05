@@ -84,7 +84,6 @@ export const EquationSlice = createSlice({
         },
         SEND: state => {
             state.submitted = [...state.equations];
-            state = []
         }
     }
 })

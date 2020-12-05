@@ -47,7 +47,7 @@ function TextArea(props){
                     control={
                     <IconButton onClick={handleEnterPress("onClick")} onKeyPress={handleEnterPress}>
                         <SendIcon style={{ fontSize: 40, color: "black", padding: 0}}></SendIcon>
-                        </IconButton>
+                    </IconButton>
                     }
                 >
                 </FormControlLabel>

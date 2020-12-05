@@ -43,9 +43,12 @@ export default function SaveEquationDialog(props) {
         setCategories([...categories.slice(0, index), value, ...categories.slice(index + 1)]);
     }
     const handleSave = (event) => {
+        const DEFAULT_CATEGORY_VALUE = 'DEFAULT_CATEGORY_VALUE'
         equations.forEach((item, index) => {
+            let tempCategory;
+            (categories[index] === '') ? tempCategory = DEFAULT_CATEGORY_VALUE : tempCategory = categories[index];
             const newEntry = {
-                category: categories[index],
+                category: tempCategory,
                 equation: item
             }
             axios.post(`${process.env.REACT_APP_API}/saveEquations`, newEntry)
