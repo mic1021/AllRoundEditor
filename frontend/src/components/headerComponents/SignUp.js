@@ -7,12 +7,6 @@ import axios from 'axios';
 import { LOGIN } from '../../slices/EquationSlice';
 import { useDispatch } from 'react-redux';
 
-const config = {
-    headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-    }
-}
-
 export default function SignUp(props) {
     const [open, setOpen] = useState(false);
     const [email, setEmail] = useState('');
@@ -46,7 +40,7 @@ export default function SignUp(props) {
             confirmPassword,
             handle
         }
-        axios.post('http://localhost:5001/allroundeditor-261bc/asia-northeast3/api/signup', userData)
+        axios.post(`${process.env.REACT_APP_API}/signup`, userData)
             .then(res=>{
                 console.log(res.data);
                 const FBIdToken = `Bearer ${res.data.token}`;
