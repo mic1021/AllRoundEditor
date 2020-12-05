@@ -41,16 +41,16 @@ export default function Header() {
     return (
         <AppBar position="sticky">
             <Toolbar>
-                <div style={{padding:'0 10px 0 0', lineHeight:'20px'}}>
+                <div style={{padding:'0 10px 0 0', lineHeight:'20px', fontSize: '10px'}}>
                     <Button variant="outlined" size ='small'>
                         <SavedEquations></SavedEquations>
                     </Button>
                 </div>
+                <div style={{padding:'0 10px 0 0', lineHeight:'20px', fontSize: '30px'}}>
+                    <Button onClick={handleClick} variant="outlined" size ='large'>Submit</Button>
+                </div>
                 <div style={{padding:'0 10px 0 0', lineHeight:'20px'}}>
                     <SaveEquations></SaveEquations>
-                </div>
-                <div style={{padding:'0 10px 0 0', lineHeight:'20px', fontSize: '30px'}}>
-                    <Button onClick={handleClick} variant="outlined" size ='small'>Submit</Button>
                 </div>
                 {/*<center>
                     <img src = {imgA} style={{alignSelf:"center",}} alt=""/>
