@@ -1,43 +1,30 @@
 import React, { useEffect } from 'react';
-import List from '@material-ui/core/List';
-import EquationListRow from './EquationListRow';
-import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch, useSelector} from 'react-redux';
-import { selectEquation, INITCHECK } from '../../slices/EquationSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { uid } from 'react-uid';
+import List from '@material-ui/core/List';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-}));
+import EquationListRow from './EquationListRow';
+import { selectEquation, INITCHECK } from '../../slices/EquationSlice';
 
-function EquationList(props) {
-    const equations = useSelector(selectEquation)
-    const dispatch = useDispatch();
-    const rows = [];
+function EquationList() {
+  const equations = useSelector(selectEquation);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(INITCHECK);
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(INITCHECK);
+  }, [dispatch]);
 
-    equations.forEach((equation, index) => {
-        rows.push(
-            <EquationListRow
-                equation={equation}
-                index={index}
-                key={uid(equation)}
-            ></EquationListRow>
-        );
-    })
-    
-    return (
-        <List>
-            {rows}
-        </List>
-    )
+  return (
+    <List>
+      {equations.map((equation, index) => (
+        <EquationListRow
+          key={uid(equation)}
+          index={index}
+          equation={equation}
+        ></EquationListRow>
+      ))}
+    </List>
+  );
 }
 
 export default EquationList;
