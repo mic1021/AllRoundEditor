@@ -19,7 +19,7 @@ function TextArea(props){
     const dispatch = useDispatch();
 
     const handleEnterPress = (clicked) => (event) => {
-        if(event.key==="enter" || clicked === "onClick") {
+        if(clicked === "onClick") {
             dispatch(SUBMIT());
         }
     }
@@ -45,7 +45,7 @@ function TextArea(props){
                     onClick={(event) => event.stopPropagation()}
                     onFocus={(event) => event.stopPropagation()}
                     control={
-                    <IconButton onClick={handleEnterPress("onClick")} onKeyPress={handleEnterPress}>
+                    <IconButton onClick={handleEnterPress("onClick")}>
                         <SendIcon style={{ fontSize: 40, color: "black", padding: 0}}></SendIcon>
                     </IconButton>
                     }
