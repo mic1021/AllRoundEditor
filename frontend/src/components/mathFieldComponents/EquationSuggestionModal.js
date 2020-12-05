@@ -14,7 +14,7 @@ addStyles();
 const useStyles = makeStyles(() => ({
   paper: {
     width: '100%',
-    height: 500,
+    height: 700,
     padding: 0,
   },
   textField: {

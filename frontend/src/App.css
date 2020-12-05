@@ -122,6 +122,7 @@
 .MuiDialogContent-root .mq-math-mode .mq-binary-operator {
   padding-left: 0 !important;
   padding-right: 0 !important;
+  width: fit-content !important;
 }
 
 /*.AppBar{
