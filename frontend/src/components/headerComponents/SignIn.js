@@ -3,17 +3,36 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import { makeStyles } from '@material-ui/core';
+
 import TextField from '@material-ui/core/TextField';
 import SignUp from './SignUp';
 import { LOGIN } from '../../slices/EquationSlice';
 import { useDispatch } from 'react-redux';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/grid';
+import {Container} from '@material-ui/core';
+
+const useStyles = makeStyles(() => ({
+  paper: {
+    width: '100%',
+    height: 200,
+    padding: 0,
+  },
+  textField: {
+    padding: '0 30',
+    width: '100%',
+  },
+}));
 
 export default function SignIn() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  
+  const classes = useStyles();
+
   useEffect(() => {
   })
   const handleClick = () => {
@@ -47,28 +66,30 @@ export default function SignIn() {
   }
   return (
     <>
-      <Button onClick={handleClick}>Sign In</Button>
-      <Dialog onClose={handleClose} open={open}>
-        <DialogTitle>Login</DialogTitle>
-        <TextField 
-          id="email" 
-          name="email" 
-          type="email" 
-          label="Email"
-          value={email}
-          onChange={handleChange}
-          fullWidth/>
-        <TextField 
-          id="password" 
-          name="password" 
-          type="password" 
-          label="Password"
-          value={password}
-          onChange={handleChange}
-          fullWidth/>  
-        <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}> Login </Button>
-        <SignUp></SignUp>
-      </Dialog>
+    <Button onClick={handleClick}>Sign In</Button>
+    <Dialog onClose={handleClose} open={open}>
+    <>
+      <DialogTitle>Login</DialogTitle>
+      <TextField
+        id="email" 
+        name="email" 
+        type="email" 
+        label="Email"
+        value={email}
+        onChange={handleChange}
+        fullWidth/>
+      <TextField 
+        id="password" 
+        name="password" 
+        type="password" 
+        label="Password"
+        value={password}
+        onChange={handleChange}
+        fullWidth/>  
+      <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}> Login </Button>
+      <SignUp></SignUp>
     </>
+    </Dialog>
+  </>
   )
 }
