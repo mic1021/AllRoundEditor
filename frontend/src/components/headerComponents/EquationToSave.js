@@ -7,14 +7,14 @@ import Button from '@material-ui/core/Button';
 import {StaticMathField} from 'react-mathquill';
 
 export default function EquationToSave(props) {
-    const [category, setCategory] = useState([]);
+    const [category, setCategory] = useState('');
     const [disabled, setDisabled] = useState(false);
     const handleChange = (event) => {
         setCategory(event.target.value);
     }
     const handleSet = (event) => {
         if(disabled === false) {
-            props.categorySet(props.index, category);
+            props.handleSet(category);
         }
         setDisabled(!disabled);
     }

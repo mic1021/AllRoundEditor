@@ -1,5 +1,9 @@
 import React from 'react';
-import { Button , Grid , AppBar, Tab, Tabs} from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import AppBar from '@material-ui/core/AppBar';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCursor, selectLatex, TYPE } from '../../slices/EquationSlice';
 import PropTypes from 'prop-types';
