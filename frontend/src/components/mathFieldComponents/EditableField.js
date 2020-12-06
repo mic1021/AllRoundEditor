@@ -1,7 +1,7 @@
 import React,{useEffect, useRef} from 'react';
 import { EditableMathField } from 'react-mathquill';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectLatex, TYPE, CURSOR, selectShowDialogue, selectMathCmd, toggleDialogue, selectCursor, MATHCMD} from '../../slices/EquationSlice';
+import { selectLatex, TYPE, CURSOR, selectShowDialogue, selectMathCmd, toggleDialogue, selectCursor, MATHCMD, SUBMIT} from '../../slices/EquationSlice';
 import EquationSuggestionModal from './EquationSuggestionModal';
 import { makeStyles } from '@material-ui/core';
 
@@ -78,6 +78,8 @@ function EditableField(props) {
             handleChange(localMathField);
         } else if (Number(e.keyCode) === 220) {     // backslash
             dispatch(toggleDialogue(''));
+        } else if(Number(e.keyCode)===13) {// enter
+            dispatch(SUBMIT());
         }
     }
 
