@@ -9,6 +9,21 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { selectEquation } from '../../slices/EquationSlice';
 import EquationToSave from './EquationToSave';
+import { mergeClasses } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core';
+
+
+const useStyles = makeStyles(() => ({
+    paper: {
+      width: '100%',
+      height: 500,
+      padding: '0 10 10 10'
+    },
+    textField: {
+      padding: '0 30',
+      width: '100%',
+    },
+  }));
 
 function useGetCheckedEquations(checkArray) {
     const equations = useSelector(selectEquation);
@@ -66,14 +81,14 @@ export default function SaveEquationDialog(props) {
             onClose={props.handleClose}
         >
             <DialogTitle>Categorize Equations</DialogTitle>
-            <DialogContent dividers={true}>
-                <List>
+            <DialogContent dividers={true} className={mergeClasses.paper}>
+                
                     {equations.map((item, index) => {
                         return(
                             <EquationToSave handleSet={handleSet(index)} key={index} index={index} equation={item} />
                         )
                     })}
-                </List>
+                
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.handleClose} color="primary">Cancel</Button>
