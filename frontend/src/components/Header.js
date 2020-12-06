@@ -47,7 +47,7 @@ export default function Header() {
                     </Button>
                 </div>
                 <div style={{padding:'0 10px 0 0', lineHeight:'20px', fontSize: '30px'}}>
-                    <Button onClick={handleClick} variant="outlined" size ='large'>Submit</Button>
+                    <Button onClick={handleClick} variant="outlined" size ='large' style={{borderStyle: 'solid', backgroundColor: '#3f51b5', padding: '7px', color: 'white', margin: '-5px'}}>Submit</Button>
                 </div>
                 <div style={{padding:'0 10px 0 0', lineHeight:'20px'}}>
                     <SaveEquations></SaveEquations>

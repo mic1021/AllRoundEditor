@@ -34,6 +34,7 @@ export default function SaveEquations(props) {
                 startIcon={<SaveIcon/>}
                 onClick={handleClick}
                 size='large'
+                style={{border: '0.05px solid rgb(41, 60, 120)', borderStyle: 'solid', borderStyle: 'solid', borderColor: 'black'}}
             />
             <NoEquationError
                 open={openError}

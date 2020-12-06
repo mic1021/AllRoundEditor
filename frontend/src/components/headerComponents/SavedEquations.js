@@ -14,7 +14,7 @@ export default function SavedEquations(props) {
 
     return (
         <>
-            <Button onClick={handleClick}>Saved Equations</Button>
+            <Button onClick={handleClick} variant="outlined" style={{borderStyle: 'solid', width: '90.328px', backgroundColor: '#3f51b5', padding: '0px', color: 'white', fontSize:'0.745rem'}}>Saved Equations</Button>
             {open && <SavedEquationDailog open={open} handleClose={handleClose}/>}
         </>
     )

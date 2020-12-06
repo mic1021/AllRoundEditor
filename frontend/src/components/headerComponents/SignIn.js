@@ -64,10 +64,10 @@ export default function SignIn() {
     setOpen(false);
   }
   return (
-    <>
-    <Button onClick={handleClick}>Sign In</Button>
-    <Dialog onClose={handleClose} open={open}>
-    <>
+      <>
+      <Button onClick={handleClick} style={{border: '0.05px solid rgb(41, 60, 120)', borderStyle: 'solid', backgroundColor: '#3f51b5', padding: '9px', color: 'white'}}>Sign In</Button>
+      <Dialog onClose={handleClose} open={open}>
+      <>
       <DialogTitle>Login</DialogTitle>
       <Box className={classes.textField}>
       <TextField
