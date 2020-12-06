@@ -8,10 +8,12 @@ import ListItem from '@material-ui/core/ListItem';
 // import Collapse from '@material-ui/core/Collapse';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import { StaticMathField } from 'react-mathquill';
+import { addStyles, StaticMathField } from 'react-mathquill';
 import { useDispatch } from 'react-redux';
 import { TYPE } from '../../slices/EquationSlice';
+import { makeStyles } from '@material-ui/core';
 
+addStyles();
 // function useLoadAndCategorizeEquations() {
 //     const [categorizedEquations, setCategorizedEquations] = useState();
 //     useEffect(() => {
@@ -34,9 +36,23 @@ import { TYPE } from '../../slices/EquationSlice';
 //     return categorizedEquations;
 // }
 
+const useStyles = makeStyles(() => ({
+    paper: {
+      width: '100%',
+      height: 400,
+      padding: 0,
+    },
+    title: {
+      padding: '0 30',
+      width: '100%',
+    },
+  }));
+
+
 export default function SavedEquationDailog(props) {
     // const categorizedEquations = useLoadAndCategorizeEquations();
     const [equations, setEquations] = useState([]);
+    const classes = useStyles(); ////////추가한거
     // const [open, setOpen] = useState([]);
     // const [list, setList] = useState();
     // const DEFAULT_CATEGORY_VALUE = 'DEFAULT_CATEGORY_VALUE'
@@ -111,10 +127,10 @@ export default function SavedEquationDailog(props) {
         dispatch(TYPE(equations[index].equation));
     }
     return (
-        <Dialog onClose={props.handleClose} open={props.open}>
-            <DialogTitle>Saved Equations</DialogTitle>
-            <DialogContent dividers={true}>
-                <List>
+        <Dialog onClose={props.handleClose} open={props.open} fullwidth>
+            <DialogTitle >Saved Equations</DialogTitle>
+            <DialogContent dividers={true} className={classes.paper}>
+                
                     {equations.map((item, index) => {
                         return(
                             <ListItem key={index} button onClick={handleClick(index)}>
@@ -122,7 +138,7 @@ export default function SavedEquationDailog(props) {
                             </ListItem>
                         )
                     })}
-                </List>
+                
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.handleClose} color="primary">Cancel</Button>
