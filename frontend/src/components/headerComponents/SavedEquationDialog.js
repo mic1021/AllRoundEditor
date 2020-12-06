@@ -38,7 +38,7 @@ addStyles();
 
 const useStyles = makeStyles(() => ({
     paper: {
-      width: '100%',
+      width: '500px',
       height: 400,
       padding: 0,
     },

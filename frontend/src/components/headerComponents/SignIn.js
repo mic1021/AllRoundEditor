@@ -15,14 +15,13 @@ import Grid from '@material-ui/core/grid';
 import {Container} from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
-  paper: {
-    width: '100%',
-    height: 200,
-    padding: 0,
+  button: {
+    margin: '0 5px',
+    width: '45%'
   },
   textField: {
-    padding: '0 30',
-    width: '100%',
+    padding: '0 30px 30px 30px',
+    width: '200px',
   },
 }));
 
@@ -65,11 +64,12 @@ export default function SignIn() {
     setOpen(false);
   }
   return (
-    <>
-    <Button onClick={handleClick}>Sign In</Button>
-    <Dialog onClose={handleClose} open={open}>
-    <>
+      <>
+      <Button onClick={handleClick} style={{border: '0.05px solid rgb(41, 60, 120)', borderStyle: 'solid', backgroundColor: '#3f51b5', padding: '9px', color: 'white'}}>Sign In</Button>
+      <Dialog onClose={handleClose} open={open}>
+      <>
       <DialogTitle>Login</DialogTitle>
+      <Box className={classes.textField}>
       <TextField
         id="email" 
         name="email" 
@@ -85,9 +85,10 @@ export default function SignIn() {
         label="Password"
         value={password}
         onChange={handleChange}
-        fullWidth/>  
-      <Button type="submit" variant="contained" color="primary" onClick={handleSubmit}> Login </Button>
+        fullWidth/>
+      <Button type="submit" variant="contained" color="primary" onClick={handleSubmit} className={classes.button}> Login </Button>
       <SignUp></SignUp>
+      </Box>
     </>
     </Dialog>
   </>

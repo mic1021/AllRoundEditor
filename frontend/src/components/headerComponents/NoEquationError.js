@@ -1,12 +1,20 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
+import { textAlign } from '@material-ui/system';
+import Box from '@material-ui/core/Box';
+
+
+
 
 export default function NoEquationError(props) {
     const errorMessage = (
-        <div>
-            <h2>Error!</h2>
-            <p>Please select equations you want to save before clicking save</p>
-        </div>
+        <Box style={{backgroundColor: 'white', textAlign: 'center', width: '80%', margin: '200px auto', borderBlockStyle: 'groove'}}
+
+        >
+
+            <h1>Error!</h1>
+            <h3>Please select equations you want to save before clicking save</h3>
+        </Box>
     )
     return (
         <Modal
