@@ -30,6 +30,8 @@ export default function Header() {
                     setAuthenticated(false);
                 } else setAuthenticated(true);
             } else setAuthenticated(false);
+        } else{
+            setAuthenticated(false);
         }
     }, [loggedIn]);
 
